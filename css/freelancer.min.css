@@ -103,8 +103,8 @@ section h2{
 }
 @media (min-width:992px){
     #mainNav{
-        padding-top:1.5rem;
-        padding-bottom:1.5rem;
+        padding-top:5px;
+        padding-bottom:5px;
         -webkit-transition:padding-top .3s,padding-bottom .3s;
         -moz-transition:padding-top .3s,padding-bottom .3s;
         transition:padding-top .3s,padding-bottom .3s
@@ -152,8 +152,8 @@ header.masthead h2{
         padding-bottom:6rem
     }
     header.masthead h1{
-        font-size:4.75em;
-        line-height:4rem
+        font-size: 50px;
+        line-height: 2px;
     }
     header.masthead h2{
         font-size:1.75em
