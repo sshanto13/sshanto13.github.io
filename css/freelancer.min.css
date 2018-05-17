@@ -186,7 +186,7 @@ header.masthead h2{
         margin-bottom:-30px
     }
     .portfolio .portfolio-item{
-        margin-bottom:30px
+       
     }
 }
 .portfolio-modal .portfolio-modal-dialog{
@@ -313,6 +313,6 @@ a:active,a:focus,a:hover{
     border-color:#1a252f
 }
 .projectName{
-    margin-top: 5px!important;
+    margin-bop: 5px!important;
     color: #222!important;
   }
