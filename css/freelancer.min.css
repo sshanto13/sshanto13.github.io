@@ -312,3 +312,7 @@ a:active,a:focus,a:hover{
     background-color:#1a252f;
     border-color:#1a252f
 }
+.projectName{
+    margin-top: 5px!important;
+    color: #222!important;
+  }
