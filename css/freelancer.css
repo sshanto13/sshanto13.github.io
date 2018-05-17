@@ -378,7 +378,6 @@ a:focus, a:hover, a:active {
   background-color: #1a252f;
   border-color: #1a252f;
 }
-//correction by me
-.fa-3x {
-  font-size: 25px!important;
-}
+/*
+correction by me
+*/
