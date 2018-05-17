@@ -1,9 +1,9 @@
 body{
-    font-family:Lato
+    font-family: 'Oswald', sans-serif;
 }
 h1,h2,h3,h4,h5,h6{
     font-weight:700;
-    font-family:Montserrat
+    font-family: 'Oswald', sans-serif;
 }
 hr.star-dark,hr.star-light{
     max-width:15rem;
@@ -285,7 +285,7 @@ a:active,a:focus,a:hover{
     border-width:2px
 }
 .bg-primary{
-    background-color:#18bc9c!important
+    background-color:#2c3e50!important
 }
 .bg-secondary{
     background-color:#2c3e50!important
@@ -322,4 +322,7 @@ a:active,a:focus,a:hover{
     font-size: 17px;
     color: #000;
     font-weight: 800;
+  }
+.py-3{
+padding: 8px 15px!important;
   }
