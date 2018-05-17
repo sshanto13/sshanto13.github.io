@@ -318,7 +318,7 @@ a:active,a:focus,a:hover{
 .projectName{
     color: #444!important;
   }
- .projectName span{
+ .projectName span,projectName a{
     font-size: 17px;
     color: #000;
     font-weight: 800;
