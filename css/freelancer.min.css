@@ -110,7 +110,7 @@ section h2{
         transition:padding-top .3s,padding-bottom .3s
     }
     #mainNav .navbar-brand{
-        font-size:2em;
+        font-size:20px;
         -webkit-transition:font-size .3s;
         -moz-transition:font-size .3s;
         transition:font-size .3s
