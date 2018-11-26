@@ -329,3 +329,6 @@ a:active,a:focus,a:hover{
 .py-3{
 padding: 8px 15px!important;
   }
+  .lead{
+      text-align: justify;
+  }
