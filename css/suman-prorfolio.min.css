@@ -229,8 +229,9 @@ section h2 {
 }
 
 header.masthead {
-    padding-top: calc(6rem + 72px);
-    padding-bottom: 6rem
+     padding-top: calc(6rem + 45px);
+     padding-bottom: 6rem;
+     height: 100vh;
 }
 
 header.masthead h1 {
