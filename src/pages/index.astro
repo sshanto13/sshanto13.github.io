@@ -234,6 +234,22 @@ const education = [
   title={`${profile.name} — ${profile.title}`}
   description="Senior software engineer portfolio: Laravel/PHP, REST APIs, scalable systems, and production-ready UI."
   canonicalPath="/"
+  structuredData={{
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: profile.name,
+    jobTitle: profile.title,
+    url: Astro.site ?? 'https://sshanto13.github.io',
+    image: new URL(profile.photoSrc, Astro.site ?? 'https://sshanto13.github.io').toString(),
+    email: `mailto:${profile.email}`,
+    telephone: profile.phone,
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Dhaka',
+      addressCountry: 'BD',
+    },
+    sameAs: [profile.links.github, profile.links.linkedin, profile.links.codepen, profile.links.facebook],
+  }}
 >
   <header class="site-nav">
     <nav class="container nav-inner navbar navbar-expand-lg navbar-dark">
@@ -245,8 +261,8 @@ const education = [
       <button
         class="navbar-toggler"
         type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navLinks"
+        data-toggle="collapse"
+        data-target="#navLinks"
         aria-controls="navLinks"
         aria-expanded="false"
         aria-label="Toggle navigation"
@@ -274,7 +290,23 @@ const education = [
     <section class="hero">
       <div class="container">
         <div class="row g-4 align-items-center">
-          <div class="col-lg-7">
+          <div class="col-lg-5 order-1 order-lg-2">
+            <div class="profile">
+              <div class="profile-frame">
+                <img src={profile.photoSrc} alt={`${profile.name} profile photo`} loading="eager" />
+              </div>
+              <div class="mt-3 social">
+                <a class="link-btn" href={profile.links.linkedin} target="_blank" rel="noreferrer">
+                  <i class="fa fa-linkedin" aria-hidden="true"></i> LinkedIn
+                </a>
+                <a class="link-btn" href={profile.links.codepen} target="_blank" rel="noreferrer">
+                  <i class="fa fa-codepen" aria-hidden="true"></i> CodePen
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-7 order-2 order-lg-1">
             <div class="hero-card">
               <span class="hero-kicker">
                 <i class="fa fa-code" aria-hidden="true"></i>
@@ -325,22 +357,6 @@ const education = [
                   <strong>Responsive UI</strong>
                   <span>Frontend delivery</span>
                 </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-5">
-            <div class="profile">
-              <div class="profile-frame">
-                <img src={profile.photoSrc} alt={`${profile.name} profile photo`} loading="eager" />
-              </div>
-              <div class="mt-3 social">
-                <a class="link-btn" href={profile.links.linkedin} target="_blank" rel="noreferrer">
-                  <i class="fa fa-linkedin" aria-hidden="true"></i> LinkedIn
-                </a>
-                <a class="link-btn" href={profile.links.codepen} target="_blank" rel="noreferrer">
-                  <i class="fa fa-codepen" aria-hidden="true"></i> CodePen
-                </a>
               </div>
             </div>
           </div>
