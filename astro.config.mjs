@@ -9,5 +9,6 @@ export default defineConfig({
   // or at "/<repo>/" (project site). We compute this in CI and pass
   // it as BASE_PATH so the built site has correct asset URLs.
   base: process.env.BASE_PATH ?? '/',
+  outDir: process.env.ASTRO_OUT_DIR ?? 'dist',
 });
 

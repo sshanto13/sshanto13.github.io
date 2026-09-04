@@ -5,18 +5,17 @@ const year = new Date().getFullYear();
 
 const profile = {
   name: 'Sumon Ray',
-  title: 'Senior Software Engineer (PHP/Laravel)',
+  title: 'Software Engineer',
   tagline: 'PHP • Laravel • REST APIs • MySQL • 7+ Years Experience',
   company: 'Destinique LLC',
   location: 'Dhaka, Bangladesh',
   photoSrc: 'img/ss-linkedin.png',
   email: 'sumancsediu@gmail.com',
   phone: '+88 01952 499680',
-  resumeUrl: 'files/Sumon_Ray_Senior_Web_Programmer_Samakal.pdf',
+  resumeUrl: 'files/Sumon_Ray_Software_Engineer_updated_2026.pdf',
   links: {
     github: 'https://github.com/sshanto13',
     linkedin: 'https://linkedin.com/in/sshanto13/',
-    codepen: 'https://codepen.io/sshanto13/',
     facebook: 'https://fb.com/sshanto21/',
   },
 };
@@ -35,113 +34,111 @@ type Project = {
 
 const featuredProjects: Project[] = [
   {
-    title: 'BUZFI — E‑commerce Platform & Backend',
+    title: 'Destinique — Luxury Travel & Vacation Platform',
     description:
-      'High-volume e-commerce backend focused on scalability, automation, and performance.',
-    role: 'Lead backend engineer',
-    impact: 'Automated bulk catalog updates and reduced manual entry time (internal ops).',
+      'Customer-facing travel platform with booking, business operations, analytics, and marketing integrations.',
+    role: 'Software Engineer',
+    impact: 'Delivered frontend and backend features supporting travel products and business operations.',
     highlights: [
-      'Developed scalable Laravel APIs for large product catalogs and order surges',
-      'Designed bulk data ingestion/processing with async workflows',
-      'Used Redis caching to improve performance for critical endpoints',
-    ],
-    image: 'img/screenshots/buzfi.png',
-    stack: ['Laravel', 'MySQL', 'REST APIs', 'Redis', 'Cloudflare'],
-    liveUrl: 'https://buzfi.com',
-  },
-  {
-    title: 'Destinique — Luxury travel advisor platform',
-    description:
-      'Internal tooling + analytics integrations to support marketing workflows and product decisions.',
-    role: 'Tooling & analytics',
-    impact: 'Improved visibility into user behavior and conversion paths using GA/GA4.',
-    highlights: [
-      'Architected user-tracking via Google Analytics (GA4) for data-driven decisions',
-      'Built internal promotion and ad-automation tools to streamline marketing workflows',
-      'Contributed to Angular UI and improved SEO via WordPress optimization',
+      'Developed travel product, booking, and business operation features',
+      'Contributed to customer-facing website using Angular with integrated backend services',
+      'Built analytics and marketing integrations for data-driven decisions',
     ],
     image: 'img/screenshots/destinique.png',
-    stack: ['Angular', 'GA4', 'WordPress', 'Cloudflare'],
-    liveUrl: 'https://destinique.com',
+    stack: ['Angular', 'PHP REST API', 'MySQL', 'JavaScript', 'Bootstrap', 'Cloudflare'],
+    liveUrl: 'https://destinique.com/',
   },
   {
-    title: 'Paimart — Wholesale E‑commerce',
+    title: 'Destinique Dashboard — Internal Business Platform',
     description:
-      'Wholesale platform with order, product, and reporting systems.',
-    role: 'System architecture & backend',
-    impact: 'Built reporting and operational workflows used by internal teams.',
+      'Internal tools for booking, product, promotion, reporting, and business operations.',
+    role: 'Software Engineer',
+    impact: 'Built operational dashboards and workflow automation for the luxury travel team.',
     highlights: [
-      'Developed order, product, and reporting systems',
-      'Integrated analytics and marketing tools',
+      'Developed Visitor Tracking, Advertisement Generation, and Promotion Management systems',
+      'Built Property Management and Booking Management tools',
+      'Designed REST APIs, dashboards, and business workflow automation',
+    ],
+    image: 'img/screenshots/destinique_dashboard_ad_generation.png',
+    stack: ['PHP', 'MySQL', 'JavaScript', 'Bootstrap', 'Cloudflare'],
+    liveUrl: 'https://quote.destinique.com/destin/dashboard/',
+  },
+  {
+    title: 'PaiMart — Wholesale E‑commerce',
+    description:
+      'Wholesale e-commerce platform with product, order, customer, and business operations management.',
+    role: 'Assistant Manager (Engineering)',
+    impact: 'Delivered e-commerce, POS, ERP, and internal business tools for Bangladesh and Dubai markets.',
+    highlights: [
+      'Developed and maintained e-commerce platforms, POS systems, and ERP solutions',
+      'Designed database structures, business workflows, and API integrations',
+      'Led backend and full-stack development using PHP, Laravel, and REST APIs',
     ],
     image: 'img/screenshots/paimart.png',
-    stack: ['Laravel', 'MySQL', 'JavaScript', 'Bootstrap'],
+    stack: ['Laravel', 'MySQL', 'JavaScript', 'Bootstrap', 'Vultr'],
     liveUrl: 'https://paimart.painest.com/',
   },
   {
-    title: 'TERBB — Pension Disbursement (Government)',
-    description: 'CMS-based platform with backend optimization and data-driven workflows.',
-    role: 'Backend engineer',
-    impact: 'Built a secure, high-reliability workflow for government-scale operations.',
-    highlights: [
-      'Developed CMS-based workflows and optimized backend performance',
-      'Focused on reliability, data consistency, and production stability',
-    ],
-    image: 'img/portfolio/terbb.png',
-    stack: ['Laravel', 'PHP', 'MySQL'],
-    liveUrl: 'http://apps.ngte-welfaretrust.gov.bd',
-  },
-  {
-    title: 'JS ERP — Sales & Inventory (ERP/POS)',
-    description: 'ERP/POS system for sales, invoicing, inventory, and employee management.',
+    title: 'JS ERP — Sales, Billing & Inventory System',
+    description: 'ERP system for sales, invoicing, billing, inventory, and employee management.',
     role: 'Backend engineer',
     impact: 'Delivered core business workflows for internal operations and reporting.',
     highlights: [
-      'Built backend logic for sales, invoices, inventory, and employee management',
+      'Built ERP features for sales, invoicing, billing, inventory, and employee management',
       'Designed data models and optimized queries for reporting workflows',
     ],
     image: 'img/portfolio/js-erp.png',
-    stack: ['Laravel', 'MySQL', 'JavaScript', 'Bootstrap'],
+    stack: ['Laravel', 'MySQL', 'JavaScript', 'Bootstrap', 'Vultr'],
     liveUrl: 'https://js-erp.paitechno.com',
   },
-];
-
-const otherProjects: Project[] = [
   {
-    title: 'Paikaree.com.bd',
-    description: 'E‑commerce platform engineering (core features + production maintenance).',
+    title: 'E-commerce Operation — Back Office Management',
+    description: 'Back-office system for order, product, inventory, and e-commerce operations management.',
+    role: 'Backend engineer',
+    impact: 'Streamlined internal operations for a growing e-commerce business.',
+    highlights: [
+      'Developed back-office solutions for order and product management',
+      'Built inventory and e-commerce operations workflows',
+    ],
     image: 'img/portfolio/paikaree.png',
-    stack: ['Laravel', 'MySQL', 'Redis'],
-    liveUrl: 'https://paikaree.com.bd/',
+    stack: ['Laravel', 'MySQL', 'JavaScript', 'Bootstrap', 'Vultr'],
+    liveUrl: 'https://operation.paikaree.com',
   },
   {
-    title: 'CDAS',
-    description: 'Web application front-end delivery.',
-    image: 'img/portfolio/cdas.png',
-    stack: ['HTML', 'CSS', 'JavaScript'],
-    liveUrl: 'https://www.cdas.co.sz/',
-  },
-  {
-    title: 'NYBSYS — Frontend for large-scale apps',
-    description:
-      'Worked with South Africa-based teams on frontend solutions and APIs across web/mobile/IoT/LTE initiatives.',
-    image: 'img/portfolio/nybsys.png',
-    stack: ['JavaScript', 'REST', 'Team collaboration'],
+    title: 'TERBB — Government Project',
+    description: 'CMS-based government web platform with backend and database management.',
+    role: 'Backend engineer',
+    impact: 'Built a secure, high-reliability workflow for government-scale operations.',
+    highlights: [
+      'Developed CMS-based government web platform',
+      'Managed backend systems and database workflows for production use',
+    ],
+    image: 'img/portfolio/terbb.png',
+    stack: ['Laravel', 'MySQL', 'Bootstrap'],
+    liveUrl: 'http://apps.ngte-welfaretrust.gov.bd',
   },
 ];
 
 const skillGroups: { title: string; skills: string[] }[] = [
   {
-    title: 'Backend & APIs',
-    skills: ['PHP', 'Laravel', 'REST APIs', 'Backend architecture', 'Query optimization', 'CI/CD basics'],
+    title: 'Backend & Programming',
+    skills: ['PHP', 'Laravel', 'REST APIs', 'JavaScript', 'TypeScript'],
   },
   {
     title: 'Frontend',
-    skills: ['JavaScript', 'HTML5', 'CSS3', 'Bootstrap', 'VueJS', 'ReactJS', 'Angular'],
+    skills: ['Vue.js', 'jQuery', 'AJAX', 'HTML5', 'CSS3', 'Tailwind CSS', 'Bootstrap', 'Angular', 'React'],
   },
   {
-    title: 'Data, Infra & Tooling',
-    skills: ['MySQL', 'Redis', 'Cloudflare', 'DigitalOcean', 'Vultr', 'Git', 'GA4', 'Facebook Conversion API'],
+    title: 'Database',
+    skills: ['MySQL', 'Redis'],
+  },
+  {
+    title: 'Cloud & Infrastructure',
+    skills: ['AWS (EC2, RDS, SES)', 'DigitalOcean', 'Vultr', 'Cloudflare', 'Vercel'],
+  },
+  {
+    title: 'Others',
+    skills: ['WordPress', 'WooCommerce', 'Git', 'CI/CD'],
   },
 ];
 
@@ -158,38 +155,27 @@ const experience: Experience[] = [
   {
     company: 'Destinique LLC',
     title: 'Software Engineer',
-    location: 'Remote (USA)',
-    start: 'Jan 2026',
+    location: 'Remote, USA',
+    start: 'Feb 2025',
     end: 'Present',
     bullets: [
-      'Engineered internal promotion engines and ad-automation tools to streamline marketing workflows.',
-      'Designed user-tracking via Google Analytics (GA4) to support data-driven product decisions.',
-      'Contributed to an Angular-based interface and ensured smooth integration with backend services.',
-      'Improved SEO performance by optimizing WordPress content and publishing workflows.',
+      'Build and maintain internal software products supporting luxury travel and property operations.',
+      'Developed internal tools including Visitor Tracking, Advertisement Generation, Promotion Management, Property Management, and Booking Management systems.',
+      'Built REST APIs, database-driven applications, dashboards, and business workflow automation.',
+      'Contributed to the customer-facing website using Angular and integrated backend services.',
     ],
   },
   {
-    company: 'BUZFI LLC',
-    title: 'Software Engineer',
-    location: 'Remote (USA)',
-    start: 'Mar 2024',
-    end: 'Dec 2025',
-    bullets: [
-      'Developed high-volume Laravel APIs designed to handle large catalogs and order spikes.',
-      'Built bulk ingestion/processing pipelines using asynchronous jobs and Redis caching.',
-      'Worked across infrastructure needs: DNS, email delivery configuration, and Cloudflare security layers.',
-    ],
-  },
-  {
-    company: 'JS Enterprise Limited (Paikaree, Paimart)',
+    company: 'PaiMart by PaiNest',
     title: 'Assistant Manager (Engineering)',
     location: 'Dhaka, Bangladesh',
     start: 'Jan 2021',
-    end: 'Feb 2024',
+    end: 'Jan 2025',
     bullets: [
-      'Led development of ERP/POS and e-commerce capabilities for wholesale operations.',
-      'Translated business requirements into production-ready features for Paikaree and Paimart platforms.',
-      'Collaborated closely with stakeholders and ensured reliable delivery in production.',
+      'Developed and maintained e-commerce platforms, POS systems, ERP solutions, APIs, and internal business tools.',
+      'Led backend and full-stack development using PHP, Laravel, MySQL, JavaScript, and REST APIs.',
+      'Designed database structures, business workflows, and integrations for commerce and operational processes.',
+      'Collaborated with engineering and business teams to deliver scalable software solutions.',
     ],
   },
   {
@@ -199,19 +185,21 @@ const experience: Experience[] = [
     start: 'Oct 2019',
     end: 'Jan 2021',
     bullets: [
-      'Developed enterprise-grade applications for corporate and government clients.',
-      'Built scalable backend systems using Laravel.',
+      'Developed web applications, e-commerce platforms, backend services, and REST APIs for enterprise clients.',
+      'Designed and implemented backend systems using PHP, Laravel, and MySQL.',
+      'Collaborated with cross-functional teams to analyze requirements and deliver production-ready applications.',
     ],
   },
   {
     company: 'Nybbles Systems Limited (NYBSYS)',
     title: 'Software Engineer',
-    location: 'Dhaka, Bangladesh',
+    location: 'Mirpur, Dhaka, Bangladesh',
     start: 'Dec 2017',
     end: 'Oct 2019',
     bullets: [
-      'Worked on large-scale frontend systems and APIs.',
-      'Collaborated with international teams on complex platforms.',
+      'Developed frontend applications, web interfaces, and API integrations for large-scale software solutions.',
+      'Collaborated with distributed teams on web, mobile, IoT, LTE, and telecommunications-related projects.',
+      'Translated UI/UX designs and technical requirements into responsive, production-ready web applications.',
     ],
   },
 ];
@@ -232,7 +220,7 @@ const education = [
 
 <BaseLayout
   title={`${profile.name} — ${profile.title}`}
-  description="Senior software engineer portfolio: Laravel/PHP, REST APIs, scalable systems, and production-ready UI."
+  description="Software engineer portfolio: Laravel/PHP, REST APIs, e-commerce, ERP systems, and production-ready web applications."
   canonicalPath="/"
   structuredData={{
     '@context': 'https://schema.org',
@@ -248,11 +236,11 @@ const education = [
       addressLocality: 'Dhaka',
       addressCountry: 'BD',
     },
-    sameAs: [profile.links.github, profile.links.linkedin, profile.links.codepen, profile.links.facebook],
+    sameAs: [profile.links.github, profile.links.linkedin, profile.links.facebook],
   }}
 >
   <header class="site-nav">
-    <nav class="container nav-inner navbar navbar-expand-lg navbar-dark">
+    <nav class="container nav-inner navbar navbar-expand-lg navbar-light">
       <a class="brand" href="#top">
         <span class="brand-badge">SR</span>
         <span>{profile.name}</span>
@@ -299,8 +287,8 @@ const education = [
                 <a class="link-btn" href={profile.links.linkedin} target="_blank" rel="noreferrer">
                   <i class="fa fa-linkedin" aria-hidden="true"></i> LinkedIn
                 </a>
-                <a class="link-btn" href={profile.links.codepen} target="_blank" rel="noreferrer">
-                  <i class="fa fa-codepen" aria-hidden="true"></i> CodePen
+                <a class="link-btn" href={profile.links.github} target="_blank" rel="noreferrer">
+                  <i class="fa fa-github" aria-hidden="true"></i> GitHub
                 </a>
               </div>
             </div>
@@ -310,18 +298,18 @@ const education = [
             <div class="hero-card">
               <span class="hero-kicker">
                 <i class="fa fa-code" aria-hidden="true"></i>
-                Senior Software Engineer (Laravel & Backend Architect)
+                Software Engineer (PHP/Laravel & Full-Stack)
               </span>
 
               <h1 class="hero-title">
                 {profile.name}
               </h1>
               <p class="hero-lead" style="margin-top:-6px;">
-                Full‑stack engineer with <strong>7+ years</strong> of experience building <strong>scalable, maintainable web applications</strong>.
-                I specialize in <strong>PHP/Laravel</strong> for backend systems and <strong>REST API</strong> development, with strong experience in
-                <strong>MySQL</strong> (query optimization) and <strong>Redis</strong> (caching). On the frontend, I deliver responsive UI with
-                <strong>JavaScript</strong> and practical experience in <strong>Vue, React, and Angular</strong>. I focus on <strong>performance, reliability,
-                and clean architecture</strong> across the full stack.
+                Software Engineer with <strong>7+ years</strong> of experience designing, developing, and maintaining web applications,
+                business systems, and digital products across <strong>e-commerce</strong>, <strong>telecommunications</strong>,
+                <strong>enterprise services</strong>, and <strong>luxury travel</strong>. Strong background in
+                <strong>PHP, Laravel, MySQL, JavaScript</strong>, and <strong>REST APIs</strong>, with experience building
+                ERP/POS systems, e-commerce platforms, internal business tools, and data-driven dashboards.
               </p>
               <p class="hero-lead">
                 {profile.location} • Remote ready • Currently at <strong>{profile.company}</strong>
@@ -368,12 +356,12 @@ const education = [
       <div class="container">
         <h2 class="section-title">Professional summary</h2>
         <p class="section-subtitle">
-          Full-stack engineer with 7+ years of experience specializing in the PHP/Laravel ecosystem. I architect systems
-          that scale—with performance, reliability, and maintainability at the core.
+          Software Engineer with 7+ years of experience designing, developing, and maintaining web applications, business systems,
+          and digital products across e-commerce, telecommunications, enterprise services, and luxury travel.
         </p>
         <p class="section-subtitle" style="margin-top:-10px;">
-          From MySQL query optimization and Redis caching to analytics integrations (GA4, Facebook Conversion API), I build
-          the heavy-lifting parts of web applications that teams depend on.
+          Experienced in building full-stack applications, REST APIs, ERP and POS systems, e-commerce platforms, internal business tools,
+          property and booking systems, and data-driven dashboards—with strong skills in PHP, Laravel, MySQL, JavaScript, and cloud technologies.
         </p>
 
         <div class="row">
@@ -387,12 +375,6 @@ const education = [
             <div class="skill-box">
               <h3>Performance engineering</h3>
               <div class="small-muted">MySQL tuning, Redis caching, background processing</div>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-4 mb-4">
-            <div class="skill-box">
-              <h3>Data & marketing logic</h3>
-              <div class="small-muted">GA4, Facebook Conversion API, custom tracking systems</div>
             </div>
           </div>
           <div class="col-md-6 col-lg-4 mb-4">
@@ -450,9 +432,9 @@ const education = [
                   </div>
                   <div class="chip" style="height:fit-content;">{e.start} → {e.end}</div>
                 </div>
-                <ul style="margin:14px 0 0;color:rgba(255,255,255,.78);padding-left: 18px;">
+                <ul class="list-muted">
                   {e.bullets.map((b) => (
-                    <li style="margin:6px 0;line-height:1.5;">{b}</li>
+                    <li>{b}</li>
                   ))}
                 </ul>
               </article>
@@ -482,9 +464,9 @@ const education = [
                   {p.role ? <div class="small-muted" style="margin-bottom:8px;">Role: <strong>{p.role}</strong></div> : null}
                   {p.impact ? <div class="small-muted" style="margin-bottom:10px;">Impact: {p.impact}</div> : null}
                   {p.highlights?.length ? (
-                    <ul style="margin: 0 0 12px; padding-left: 18px; color: rgba(255,255,255,.78);">
+                    <ul class="list-muted" style="margin-top:0;margin-bottom:12px;">
                       {p.highlights.map((h) => (
-                        <li style="margin: 6px 0; line-height: 1.45;">{h}</li>
+                        <li>{h}</li>
                       ))}
                     </ul>
                   ) : null}
@@ -509,37 +491,6 @@ const education = [
               </article>
             </div>
           ))}
-        </div>
-
-        <div class="mt-5">
-          <h2 class="section-title" style="font-size: 26px;">More work</h2>
-          <p class="section-subtitle">A few additional deliveries and collaborations.</p>
-          <div class="row g-4">
-            {otherProjects.map((p) => (
-              <div class="col-md-6 col-lg-3">
-                <article class="card-neo">
-                  <div class="card-media">
-                    <img src={p.image} alt={`${p.title} screenshot`} loading="lazy" />
-                  </div>
-                  <div class="card-body-neo">
-                    <h3 class="card-title-neo">{p.title}</h3>
-                    <div class="chip-row" aria-label="tech stack">
-                      {p.stack.slice(0, 3).map((s) => (
-                        <span class="chip">{s}</span>
-                      ))}
-                    </div>
-                    <div class="card-actions">
-                      {p.liveUrl ? (
-                        <a class="link-btn" href={p.liveUrl} target="_blank" rel="noreferrer">
-                          <i class="fa fa-external-link" aria-hidden="true"></i> Visit
-                        </a>
-                      ) : null}
-                    </div>
-                  </div>
-                </article>
-              </div>
-            ))}
-          </div>
         </div>
       </div>
     </section>
