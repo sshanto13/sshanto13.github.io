@@ -1,18 +1,20 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { featuredProjects } from '../data/projects';
 
 const year = new Date().getFullYear();
+const baseUrl = import.meta.env.BASE_URL;
 
 const profile = {
   name: 'Sumon Ray',
-  title: 'Software Engineer',
-  tagline: 'PHP • Laravel • REST APIs • MySQL • 7+ Years Experience',
-  company: 'Destinique LLC',
+  title: 'Software Engineer · 8+ Years',
+  headline: 'I build software people at work can actually run.',
+  focus: 'Backend, full-stack, and business systems — mostly PHP/Laravel, MySQL, and APIs',
   location: 'Dhaka, Bangladesh',
   photoSrc: 'img/ss-linkedin.png',
   email: 'sumancsediu@gmail.com',
-  phone: '+88 01952 499680',
-  resumeUrl: 'files/Sumon_Ray_Software_Engineer_updated_2026.pdf',
+  phone: '+880 1952 499680',
+  resumeUrl: 'files/Sumon_Ray_Software_Engineer_Resume_2026.pdf',
   links: {
     github: 'https://github.com/sshanto13',
     linkedin: 'https://linkedin.com/in/sshanto13/',
@@ -20,187 +22,352 @@ const profile = {
   },
 };
 
-type Project = {
-  title: string;
-  description: string;
-  highlights?: string[];
-  role?: string;
-  impact?: string;
-  image: string;
-  stack: string[];
-  liveUrl?: string;
-  repoUrl?: string;
-};
+const usefulFor = [
+  'Backend & full-stack development where APIs, databases, and business logic matter.',
+  'Business applications—e-commerce, ERP/POS, inventory, booking, and automation.',
+  'Data, reporting, dashboards, and operational automation tied to real business needs.',
+  'Cross-stack problem solving across backend, frontend, databases, APIs, and infrastructure.',
+  'Production-focused engineering—shipping features, troubleshooting, optimization, and keeping systems reliable.',
+];
 
-const featuredProjects: Project[] = [
+const whatIDo = [
   {
-    title: 'Destinique — Luxury Travel & Vacation Platform',
-    description:
-      'Customer-facing travel platform with booking, business operations, analytics, and marketing integrations.',
-    role: 'Software Engineer',
-    impact: 'Delivered frontend and backend features supporting travel products and business operations.',
-    highlights: [
-      'Developed travel product, booking, and business operation features',
-      'Contributed to customer-facing website using Angular with integrated backend services',
-      'Built analytics and marketing integrations for data-driven decisions',
-    ],
-    image: 'img/screenshots/destinique.png',
-    stack: ['Angular', 'PHP REST API', 'MySQL', 'JavaScript', 'Bootstrap', 'Cloudflare'],
-    liveUrl: 'https://destinique.com/',
+    title: 'Backend & APIs',
+    text: 'Most of my day-to-day work is PHP/Laravel, MySQL, and REST APIs — shipping features and keeping production healthy.',
   },
   {
-    title: 'Destinique Dashboard — Internal Business Platform',
-    description:
-      'Internal tools for booking, product, promotion, reporting, and business operations.',
-    role: 'Software Engineer',
-    impact: 'Built operational dashboards and workflow automation for the luxury travel team.',
-    highlights: [
-      'Developed Visitor Tracking, Advertisement Generation, and Promotion Management systems',
-      'Built Property Management and Booking Management tools',
-      'Designed REST APIs, dashboards, and business workflow automation',
-    ],
-    image: 'img/screenshots/destinique_dashboard_ad_generation.png',
-    stack: ['PHP', 'MySQL', 'JavaScript', 'Bootstrap', 'Cloudflare'],
-    liveUrl: 'https://quote.destinique.com/destin/dashboard/',
+    title: 'Full-stack when needed',
+    text: 'I can work on the UI side too (Angular, Vue, React, plain JS) when a feature needs it.',
   },
   {
-    title: 'PaiMart — Wholesale E‑commerce',
-    description:
-      'Wholesale e-commerce platform with product, order, customer, and business operations management.',
-    role: 'Assistant Manager (Engineering)',
-    impact: 'Delivered e-commerce, POS, ERP, and internal business tools for Bangladesh and Dubai markets.',
-    highlights: [
-      'Developed and maintained e-commerce platforms, POS systems, and ERP solutions',
-      'Designed database structures, business workflows, and API integrations',
-      'Led backend and full-stack development using PHP, Laravel, and REST APIs',
-    ],
-    image: 'img/screenshots/paimart.png',
-    stack: ['Laravel', 'MySQL', 'JavaScript', 'Bootstrap', 'Vultr'],
-    liveUrl: 'https://paimart.painest.com/',
+    title: 'Business software',
+    text: 'A lot of my experience is e-commerce, ERP/POS, booking, inventory, and business automation — not just landing pages.',
   },
   {
-    title: 'JS ERP — Sales, Billing & Inventory System',
-    description: 'ERP system for sales, invoicing, billing, inventory, and employee management.',
-    role: 'Backend engineer',
-    impact: 'Delivered core business workflows for internal operations and reporting.',
-    highlights: [
-      'Built ERP features for sales, invoicing, billing, inventory, and employee management',
-      'Designed data models and optimized queries for reporting workflows',
-    ],
-    image: 'img/portfolio/js-erp.png',
-    stack: ['Laravel', 'MySQL', 'JavaScript', 'Bootstrap', 'Vultr'],
-    liveUrl: 'https://js-erp.paitechno.com',
+    title: 'Automation & reporting',
+    text: 'I like cutting down manual work: dashboards, reports, business automation, and digital transformation that save time.',
   },
   {
-    title: 'E-commerce Operation — Back Office Management',
-    description: 'Back-office system for order, product, inventory, and e-commerce operations management.',
-    role: 'Backend engineer',
-    impact: 'Streamlined internal operations for a growing e-commerce business.',
-    highlights: [
-      'Developed back-office solutions for order and product management',
-      'Built inventory and e-commerce operations workflows',
-    ],
-    image: 'img/portfolio/paikaree.png',
-    stack: ['Laravel', 'MySQL', 'JavaScript', 'Bootstrap', 'Vultr'],
-    liveUrl: 'https://operation.paikaree.com',
+    title: 'Data & SQL',
+    text: 'Comfortable with schema design, query tuning, and pulling useful reports out of messy operational data.',
   },
   {
-    title: 'TERBB — Government Project',
-    description: 'CMS-based government web platform with backend and database management.',
-    role: 'Backend engineer',
-    impact: 'Built a secure, high-reliability workflow for government-scale operations.',
-    highlights: [
-      'Developed CMS-based government web platform',
-      'Managed backend systems and database workflows for production use',
-    ],
-    image: 'img/portfolio/terbb.png',
-    stack: ['Laravel', 'MySQL', 'Bootstrap'],
-    liveUrl: 'http://apps.ngte-welfaretrust.gov.bd',
+    title: 'Production support',
+    text: 'Debugging live issues, checking logs, fixing broken integrations, and helping with deploys on VPS/cloud setups.',
   },
 ];
 
-const skillGroups: { title: string; skills: string[] }[] = [
+const beyondCoding = [
   {
-    title: 'Backend & Programming',
-    skills: ['PHP', 'Laravel', 'REST APIs', 'JavaScript', 'TypeScript'],
+    title: 'Business understanding',
+    text: 'I try to learn how the work actually gets done before writing code — otherwise you build the wrong thing.',
   },
   {
-    title: 'Frontend',
-    skills: ['Vue.js', 'jQuery', 'AJAX', 'HTML5', 'CSS3', 'Tailwind CSS', 'Bootstrap', 'Angular', 'React'],
+    title: 'Automation',
+    text: 'If people are repeating the same clicks or spreadsheet steps, I look for a small tool, report, or workflow that cuts that down.',
   },
   {
-    title: 'Database',
-    skills: ['MySQL', 'Redis'],
+    title: 'Data',
+    text: 'A lot of “business questions” are really SQL and reporting problems. I’m comfortable digging into that.',
   },
   {
-    title: 'Cloud & Infrastructure',
-    skills: ['AWS (EC2, RDS, SES)', 'DigitalOcean', 'Vultr', 'Cloudflare', 'Vercel'],
+    title: 'Problem solving',
+    text: 'Production bugs, broken integrations, slow queries — I’ve spent a lot of time chasing those down.',
   },
   {
-    title: 'Others',
-    skills: ['WordPress', 'WooCommerce', 'Git', 'CI/CD'],
+    title: 'Working with people',
+    text: 'Used to talking with developers, QA, managers, and ops folks (local and remote) to get something shipped.',
   },
+  {
+    title: 'Ownership',
+    text: 'I take features from “we need this” through build, ship, and follow-up — not just handing off code and walking away.',
+  },
+];
+
+const skillTabs: { id: string; label: string; icon: string; blurb: string; skills: string[] }[] = [
+  {
+    id: 'backend',
+    label: 'Programming & Backend',
+    icon: 'fa-server',
+    blurb: 'Programming & backend delivery.',
+    skills: [
+      'PHP',
+      'Laravel',
+      'Node.js',
+      'Python',
+      'Go',
+      'JavaScript',
+      'TypeScript',
+      'REST APIs',
+      'API Integration',
+      'Web Services',
+    ],
+  },
+  {
+    id: 'business',
+    label: 'Business & Systems',
+    icon: 'fa-briefcase',
+    blurb: 'Business applications and operational systems.',
+    skills: [
+      'E-commerce',
+      'ERP',
+      'POS',
+      'Inventory',
+      'Sales & Billing',
+      'Booking Systems',
+      'Property Management',
+      'Process Automation',
+    ],
+  },
+  {
+    id: 'database',
+    label: 'Database & Data',
+    icon: 'fa-database',
+    blurb: 'Database design, querying, and data modeling.',
+    skills: [
+      'MySQL',
+      'PostgreSQL',
+      'MongoDB',
+      'SQL',
+      'Database Design',
+      'Query Optimization',
+      'Data Modeling',
+      'Redis',
+    ],
+  },
+  {
+    id: 'frontend',
+    label: 'Frontend',
+    icon: 'fa-desktop',
+    blurb: 'Interfaces and client-side delivery.',
+    skills: [
+      'Angular',
+      'Vue.js',
+      'React',
+      'JavaScript',
+      'TypeScript',
+      'jQuery',
+      'AJAX',
+      'HTML5',
+      'CSS3',
+      'Bootstrap',
+      'Tailwind CSS',
+      'Inertia.js',
+    ],
+  },
+  {
+    id: 'cloud',
+    label: 'Cloud, DevOps & Infra',
+    icon: 'fa-cloud',
+    blurb: 'Cloud, DevOps, and infrastructure.',
+    skills: [
+      'AWS EC2 RDS SES',
+      'Cloudflare',
+      'DigitalOcean',
+      'Vultr',
+      'Cloud VPS',
+      'Docker',
+      'CI/CD',
+      'DNS',
+      'SSL',
+      'Linux',
+    ],
+  },
+  {
+    id: 'bi',
+    label: 'BI, Reporting & Analytics',
+    icon: 'fa-bar-chart',
+    blurb: 'Reporting, dashboards, and analytics.',
+    skills: [
+      'Power BI',
+      'Dashboards',
+      'Custom Reports',
+      'Google Analytics 4',
+      'Data Tracking',
+      'Conversion Tracking',
+    ],
+  },
+  {
+    id: 'ai',
+    label: 'AI-Assisted Development',
+    icon: 'fa-magic',
+    blurb: 'AI-assisted development workflow.',
+    skills: [
+      'Rapid MVP Development',
+      'Cursor',
+      'Claude',
+      'AI-Assisted Coding',
+      'Debugging',
+      'Review',
+    ],
+  },
+  {
+    id: 'practices',
+    label: 'Engineering Practices',
+    icon: 'fa-cogs',
+    blurb: 'Development and engineering practices.',
+    skills: [
+      'Git',
+      'System Design',
+      'Clean Architecture',
+      'Code Review',
+      'API Testing',
+      'Debugging',
+      'Optimisation',
+      'Security Practices',
+    ],
+  },
+  {
+    id: 'cms',
+    label: 'CMS and SEO',
+    icon: 'fa-sitemap',
+    blurb: 'CMS and e-commerce platforms.',
+    skills: [
+      'WordPress',
+      'WooCommerce',
+      'Shopify',
+      'Wix',
+      'WordPress REST API',
+      'SEO Integration',
+    ],
+  },
+  {
+    id: 'delivery',
+    label: 'Delivery & Collaboration',
+    icon: 'fa-users',
+    blurb: 'Delivery, coordination, and team ownership.',
+    skills: [
+      'Requirements',
+      'Stakeholders',
+      'Teamwork',
+      'Planning',
+      'Delivery',
+      'Mentoring',
+      'Production Support',
+      'Coordination',
+    ],
+  },
+  {
+    id: 'tools',
+    label: 'Tools and Workflow',
+    icon: 'fa-wrench',
+    blurb: 'Everyday tools and collaboration.',
+    skills: [
+      'VS Code',
+      'IntelliJ IDEA',
+      'Sublime Text',
+      'Jira',
+      'Slack',
+      'Trello',
+      'Agile / Scrum',
+      'Technical Documentation',
+    ],
+  },
+];
+
+const stats = [
+  { value: '8+', label: 'Years building software' },
+  { value: '5+', label: 'Years in e-commerce / ERP' },
+  { value: '6+', label: 'Industries covered' },
 ];
 
 type Experience = {
   company: string;
+  companyUrl?: string;
+  logo?: string;
   title: string;
   location: string;
   start: string;
   end: string;
+  summary: string;
   bullets: string[];
+  stack?: string[];
 };
 
 const experience: Experience[] = [
   {
-    company: 'Destinique LLC',
+    company: 'Destinique Travel LLC',
+    companyUrl: 'https://destinique.com/',
+    logo: 'img/screenshots/destinique.png',
     title: 'Software Engineer',
-    location: 'Remote, USA',
+    location: 'Dhaka, Bangladesh',
     start: 'Feb 2025',
     end: 'Present',
+    summary: 'Working on business automation, digital solutions, and APIs for a luxury travel / property team.',
     bullets: [
-      'Build and maintain internal software products supporting luxury travel and property operations.',
-      'Developed internal tools including Visitor Tracking, Advertisement Generation, Promotion Management, Property Management, and Booking Management systems.',
-      'Built REST APIs, database-driven applications, dashboards, and business workflow automation.',
-      'Contributed to the customer-facing website using Angular and integrated backend services.',
+      'Built and maintain solutions for visitor tracking, ads, promotions, property, and booking.',
+      'Write REST APIs and dashboards the ops team actually uses day to day.',
+      'Help with the Angular customer site and how it talks to the PHP backend.',
+      'Tune slow queries when things get heavy; dig into bugs when something breaks in production.',
+      'Sit with business folks to figure out what they need, then ship something usable.',
     ],
+    stack: ['PHP', 'Laravel', 'MySQL', 'Angular', 'JavaScript', 'REST API', 'Cloudflare', 'VPS'],
   },
   {
-    company: 'PaiMart by PaiNest',
-    title: 'Assistant Manager (Engineering)',
+    company: 'PaiMart by PaiNest — JS Enterprise Ltd.',
+    companyUrl: 'https://paimart.painest.com/',
+    logo: 'img/screenshots/paimart.png',
+    title: 'Assistant Manager, Engineering',
     location: 'Dhaka, Bangladesh',
     start: 'Jan 2021',
     end: 'Jan 2025',
+    summary:
+      '4+ years building business automation and digital solutions across e-commerce, distribution, wholesale/retail ops, ERP/POS, and day-to-day business workflows.',
     bullets: [
-      'Developed and maintained e-commerce platforms, POS systems, ERP solutions, APIs, and internal business tools.',
-      'Led backend and full-stack development using PHP, Laravel, MySQL, JavaScript, and REST APIs.',
-      'Designed database structures, business workflows, and integrations for commerce and operational processes.',
-      'Collaborated with engineering and business teams to deliver scalable software solutions.',
+      'Built and maintained systems across e-commerce, B2B distribution, wholesale/retail and field sales, products, inventory, orders, and suppliers.',
+      'Covered customers, payments, invoicing, billing, employee management, back-office operations, ERP/POS, reporting, APIs, and business workflows.',
+      'Learned how a complete business platform works—not just the software, but the sales, distribution, and day-to-day operations behind it.',
+      'Exposed APIs for storefront and mobile; collaborated with teams on integrations and production issues.',
+      'Handled releases, performance fixes, and production support as volume grew.',
     ],
+    stack: ['PHP', 'Laravel', 'MySQL', 'JavaScript', 'REST API', 'jQuery', 'Git', 'VPS'],
   },
   {
-    company: 'ADN Telecom Limited',
-    title: 'Assistant Manager (Engineering)',
+    company: 'ADN Telecom PLC',
+    companyUrl: 'https://www.adnsl.com/',
+    logo: 'img/portfolio/adncloud.png',
+    title: 'Assistant Manager, Engineering',
     location: 'Gulshan, Dhaka, Bangladesh',
     start: 'Oct 2019',
     end: 'Jan 2021',
+    summary: 'Enterprise web apps and a government ICT project while at ADN.',
     bullets: [
-      'Developed web applications, e-commerce platforms, backend services, and REST APIs for enterprise clients.',
-      'Designed and implemented backend systems using PHP, Laravel, and MySQL.',
-      'Collaborated with cross-functional teams to analyze requirements and deliver production-ready applications.',
+      'Built Laravel backends and APIs for client and enterprise applications.',
+      'Main project I remember: NGTE Welfare Trust — applications, tracking, documents, admin flows.',
+      'Did the usual mix of schema work, testing, deploy help, and fixing production issues.',
     ],
+    stack: ['PHP', 'Laravel', 'MySQL', 'JavaScript', 'REST API', 'Bootstrap'],
   },
   {
-    company: 'Nybbles Systems Limited (NYBSYS)',
+    company: 'NYBSYS Inc.',
+    companyUrl: 'https://nybsys.com/',
+    logo: 'img/portfolio/nybsys.png',
     title: 'Software Engineer',
     location: 'Mirpur, Dhaka, Bangladesh',
     start: 'Dec 2017',
-    end: 'Oct 2019',
+    end: 'Sep 2019',
+    summary: 'Web UI and API work on projects with teams spread across locations.',
     bullets: [
-      'Developed frontend applications, web interfaces, and API integrations for large-scale software solutions.',
-      'Collaborated with distributed teams on web, mobile, IoT, LTE, and telecommunications-related projects.',
-      'Translated UI/UX designs and technical requirements into responsive, production-ready web applications.',
+      'Built frontends and plugged them into backend APIs.',
+      'Worked with remote teammates on web / mobile related deliverables.',
+      'Took designs and tickets and turned them into working screens.',
     ],
+    stack: ['PHP', 'JavaScript', 'HTML', 'CSS', 'API Integration'],
+  },
+  {
+    company: 'ICT Division — Learning & Earning Development Project',
+    companyUrl: 'https://ictd.gov.bd/',
+    logo: 'img/logos/ictd.png',
+    title: 'Trainer',
+    location: 'Dhaka, Bangladesh',
+    start: 'Dec 2016',
+    end: 'Apr 2017',
+    summary: 'Taught basic web development under an ICT Division training program.',
+    bullets: [
+      'Ran classes for ~200 learners on HTML, CSS, PHP, WordPress, and MySQL.',
+      'Mostly hands-on lab sessions, not slide-only teaching.',
+    ],
+    stack: ['HTML', 'CSS', 'PHP', 'WordPress', 'MySQL'],
   },
 ];
 
@@ -210,23 +377,34 @@ const education = [
     org: 'Dhaka International University',
     time: '2010 – 2015',
   },
+];
+
+const training = [
   {
-    degree: 'Web Applications Development with PHP',
+    degree: 'Web Application Development with PHP',
     org: 'BITM, BASIS',
     time: '2015',
+    kind: 'Professional training',
+  },
+  {
+    degree: 'Web Design & Development',
+    org: 'Daffodil Institute of IT (DIIT)',
+    time: '2012',
+    kind: 'Professional training',
   },
 ];
+
 ---
 
 <BaseLayout
-  title={`${profile.name} — ${profile.title}`}
-  description="Software engineer portfolio: Laravel/PHP, REST APIs, e-commerce, ERP systems, and production-ready web applications."
+  title={`${profile.name} — Software Engineer`}
+  description="Sumon Ray — software engineer in Dhaka. PHP/Laravel, MySQL, APIs, e-commerce and business systems. Open to new roles."
   canonicalPath="/"
   structuredData={{
     '@context': 'https://schema.org',
     '@type': 'Person',
     name: profile.name,
-    jobTitle: profile.title,
+    jobTitle: 'Software Engineer',
     url: Astro.site ?? 'https://sshanto13.github.io',
     image: new URL(profile.photoSrc, Astro.site ?? 'https://sshanto13.github.io').toString(),
     email: `mailto:${profile.email}`,
@@ -239,38 +417,34 @@ const education = [
     sameAs: [profile.links.github, profile.links.linkedin, profile.links.facebook],
   }}
 >
-  <header class="site-nav">
-    <nav class="container nav-inner navbar navbar-expand-lg navbar-light">
-      <a class="brand" href="#top">
-        <span class="brand-badge">SR</span>
-        <span>{profile.name}</span>
+  <header class="site-nav" id="siteNav">
+    <nav class="fk-nav container" aria-label="Primary">
+      <a class="fk-nav-brand" href="#top" aria-label="Sumon Ray home">
+        <span class="fk-nav-logo">Sumon Ray</span>
       </a>
 
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navLinks"
-        aria-controls="navLinks"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
+      <div class="fk-nav-links" id="navLinks">
+        <a class="fk-nav-link" href="#about">About</a>
+        <a class="fk-nav-link" href="#projects">Projects</a>
+        <a class="fk-nav-link" href="#experience">Experience</a>
+        <a class="fk-nav-link" href="#skills">Skills</a>
+      </div>
+
+      <a class="fk-nav-contact" href="#contact">Contact</a>
+
+      <button class="fk-theme-toggle" type="button" aria-label="Switch to dark mode" title="Toggle theme">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4"></circle>
+          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path>
+        </svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <path d="M21 14.5A8.5 8.5 0 0 1 9.5 3 7 7 0 1 0 21 14.5z"></path>
+        </svg>
       </button>
 
-      <div class="collapse navbar-collapse" id="navLinks">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-          <li class="nav-item"><a class="nav-link" href="#skills">Expertise</a></li>
-          <li class="nav-item"><a class="nav-link" href="#experience">Experience</a></li>
-          <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
-          <li class="nav-item"><a class="nav-link" href="#education">Education</a></li>
-          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-          <li class="nav-item">
-            <a class="nav-link" href={profile.resumeUrl} target="_blank" rel="noreferrer">Resume</a>
-          </li>
-        </ul>
-      </div>
+      <button class="fk-nav-toggle" type="button" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">
+        <span></span><span></span><span></span>
+      </button>
     </nav>
   </header>
 
@@ -279,15 +453,15 @@ const education = [
       <div class="container">
         <div class="row g-4 align-items-center">
           <div class="col-lg-5 order-1 order-lg-2">
-            <div class="profile">
+            <div class="profile reveal is-in">
               <div class="profile-frame">
                 <img src={profile.photoSrc} alt={`${profile.name} profile photo`} loading="eager" />
               </div>
               <div class="mt-3 social">
-                <a class="link-btn" href={profile.links.linkedin} target="_blank" rel="noreferrer">
+                <a class="link-btn" href={profile.links.linkedin} target="_blank" rel="noopener noreferrer">
                   <i class="fa fa-linkedin" aria-hidden="true"></i> LinkedIn
                 </a>
-                <a class="link-btn" href={profile.links.github} target="_blank" rel="noreferrer">
+                <a class="link-btn" href={profile.links.github} target="_blank" rel="noopener noreferrer">
                   <i class="fa fa-github" aria-hidden="true"></i> GitHub
                 </a>
               </div>
@@ -295,118 +469,125 @@ const education = [
           </div>
 
           <div class="col-lg-7 order-2 order-lg-1">
-            <div class="hero-card">
-              <span class="hero-kicker">
-                <i class="fa fa-code" aria-hidden="true"></i>
-                Software Engineer (PHP/Laravel & Full-Stack)
-              </span>
+            <div class="hero-card reveal is-in">
+              <span class="hero-kicker">Dhaka · open to the next role</span>
 
+              <p class="hero-name">{profile.name}</p>
+              <p class="hero-role">{profile.title}</p>
               <h1 class="hero-title">
-                {profile.name}
+                I build software people at work can <em>actually run</em>.
               </h1>
-              <p class="hero-lead" style="margin-top:-6px;">
-                Software Engineer with <strong>7+ years</strong> of experience designing, developing, and maintaining web applications,
-                business systems, and digital products across <strong>e-commerce</strong>, <strong>telecommunications</strong>,
-                <strong>enterprise services</strong>, and <strong>luxury travel</strong>. Strong background in
-                <strong>PHP, Laravel, MySQL, JavaScript</strong>, and <strong>REST APIs</strong>, with experience building
-                ERP/POS systems, e-commerce platforms, internal business tools, and data-driven dashboards.
-              </p>
               <p class="hero-lead">
-                {profile.location} • Remote ready • Currently at <strong>{profile.company}</strong>
+                8+ years turning real-world requirements into web applications, APIs, business systems, and automation
+                solutions across different industries and business environments.
+              </p>
+              <p class="hero-lead hero-lead-follow">
+                I work across the stack when needed—from backend and APIs to frontend, databases, infrastructure,
+                reporting, and AI-assisted development.
               </p>
 
               <div class="hero-actions">
-                <a class="btn-primary-neo" href="#projects">
-                  <i class="fa fa-briefcase" aria-hidden="true"></i> View projects
-                </a>
-                <a class="btn-ghost" href={profile.resumeUrl} target="_blank" rel="noreferrer">
-                  <i class="fa fa-download" aria-hidden="true"></i> Download CV
-                </a>
-                <a class="btn-ghost" href={profile.links.github} target="_blank" rel="noreferrer">
-                  <i class="fa fa-github" aria-hidden="true"></i> GitHub
-                </a>
+                <a class="btn-primary-neo" href="#contact">Get in touch</a>
+                <a class="btn-ghost" href={profile.resumeUrl} target="_blank" rel="noopener noreferrer">View Resume</a>
+                <a class="btn-ghost" href="#projects">See projects</a>
               </div>
 
-              <div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:14px;">
-                <span class="chip"><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;{profile.email}</span>
-                <span class="chip"><i class="fa fa-phone" aria-hidden="true"></i>&nbsp;{profile.phone}</span>
-              </div>
-
-              <div class="stat-row" aria-label="quick stats">
-                <div class="stat">
-                  <strong>7+ years</strong>
-                  <span>Professional experience</span>
-                </div>
-                <div class="stat">
-                  <strong>Laravel + MySQL</strong>
-                  <span>Backend & APIs</span>
-                </div>
-                <div class="stat">
-                  <strong>Responsive UI</strong>
-                  <span>Frontend delivery</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section section-alt" id="about">
-      <div class="container">
-        <h2 class="section-title">Professional summary</h2>
-        <p class="section-subtitle">
-          Software Engineer with 7+ years of experience designing, developing, and maintaining web applications, business systems,
-          and digital products across e-commerce, telecommunications, enterprise services, and luxury travel.
-        </p>
-        <p class="section-subtitle" style="margin-top:-10px;">
-          Experienced in building full-stack applications, REST APIs, ERP and POS systems, e-commerce platforms, internal business tools,
-          property and booking systems, and data-driven dashboards—with strong skills in PHP, Laravel, MySQL, JavaScript, and cloud technologies.
-        </p>
-
-        <div class="row">
-          <div class="col-md-6 col-lg-4 mb-4">
-            <div class="skill-box">
-              <h3>Backend architecture</h3>
-              <div class="small-muted">High-throughput REST APIs, Laravel optimizations, scalable workflows</div>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-4 mb-4">
-            <div class="skill-box">
-              <h3>Performance engineering</h3>
-              <div class="small-muted">MySQL tuning, Redis caching, background processing</div>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-4 mb-4">
-            <div class="skill-box">
-              <h3>Infrastructure basics</h3>
-              <div class="small-muted">Cloudflare, DigitalOcean/Vultr, DNS/email, CI/CD</div>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-4 mb-4">
-            <div class="skill-box">
-              <h3>AI tools & productivity</h3>
-              <div class="small-muted">Cursor AI, Anthropic Claude, ChatGPT, Gemini</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section section-alt" id="skills">
-      <div class="container">
-        <h2 class="section-title">Core expertise</h2>
-        <p class="section-subtitle">
-          I focus on the “heavy lifting” parts of web applications—scalable backend systems, performance work, and production reliability.
-        </p>
-        <div class="skill-grid">
-          {skillGroups.map((g) => (
-            <div class="skill-box">
-              <h3>{g.title}</h3>
-              <div class="chip-row">
-                {g.skills.map((s) => (
-                  <span class="chip">{s}</span>
+              <div class="stat-row stat-row-impact" aria-label="quick stats">
+                {stats.map((s) => (
+                  <div class="stat stat-lg">
+                    <strong>{s.value}</strong>
+                    <span>{s.label}</span>
+                  </div>
                 ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section about-section" id="about" aria-labelledby="about-heading">
+      <div class="container about-shell">
+        <div class="about-card reveal">
+          <div class="about-card-top">
+            <div>
+              <p class="about-card-kicker">About</p>
+              <h2 class="about-card-title" id="about-heading">About Me</h2>
+            </div>
+            <div class="about-card-meta">
+              <span>{profile.location}</span>
+              <span class="about-card-dot" aria-hidden="true"></span>
+              <span>Open to new opportunities</span>
+            </div>
+          </div>
+
+          <div class="about-card-body">
+            <p class="about-card-lead">
+              I’m a Software Engineer with 8+ years of experience building practical software solutions for real-world
+              business operations.
+            </p>
+
+            <div class="about-card-copy">
+              <p>
+                My experience spans software companies, enterprise systems, e-commerce, government ICT, and travel &amp;
+                property management. At NYBSYS Inc and ADN Telecom PLC, I worked on software products, enterprise
+                applications, APIs, and ICT systems, building a strong foundation in professional software development
+                and working with different technical and business requirements.
+              </p>
+              <p>
+                My 4+ years with PaiMart, previously known as Paikaree.com.bd and backed by JS Enterprise, were
+                particularly valuable in understanding how a complete business platform works—not just the software, but
+                the business behind it. I worked across e-commerce, sales, distribution, inventory, orders, payments,
+                ERP/POS, reporting, APIs, and business workflows, gaining a strong understanding of how technology
+                supports day-to-day business operations.
+              </p>
+              <p>
+                At Destinique Travel LLC, I work on business automation and digital solutions covering booking, property
+                management, ad generation, promotions, visitor tracking, monitoring, APIs, dashboards, and operational
+                workflows.
+              </p>
+              <p>
+                My strongest technical ground is PHP, Laravel, SQL, MySQL, PostgreSQL, JavaScript, and REST APIs, with
+                experience across Angular, Vue, React, Node.js, Python, cloud/VPS infrastructure, Docker, and AI-assisted
+                development.
+              </p>
+              <p>
+                I also have experience with data, BI dashboards, reporting, business automation, and digital
+                transformation, giving me a broader understanding of how technology can improve business processes,
+                operational efficiency, and decision-making.
+              </p>
+              <p>
+                What I enjoy most is working where technology and business come together—understanding the problem,
+                finding a practical solution, building it, and seeing it work in the real world.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="skills">
+      <div class="container">
+        <header class="section-head reveal">
+          <p class="section-kicker">Skills</p>
+          <h2 class="section-lead">What I bring to your team</h2>
+          <p class="section-desc">
+            Building practical software solutions across <strong>full-stack development, business applications, APIs,
+            automation, data, and ICT systems</strong>, with <strong>8+ years of hands-on experience</strong> from
+            development through production delivery.
+          </p>
+        </header>
+
+        <div class="skill-rows reveal">
+          {skillTabs.map((tab) => (
+            <div class="skill-row">
+              <div class="skill-row-label">{tab.label}</div>
+              <div class="skill-row-values">
+                <div class="chip-row chip-row-compact">
+                  {tab.skills.map((s) => (
+                    <span class="chip chip-compact">{s}</span>
+                  ))}
+                </div>
               </div>
             </div>
           ))}
@@ -414,29 +595,59 @@ const education = [
       </div>
     </section>
 
-    <section class="section" id="experience">
-      <div class="container">
-        <h2 class="section-title">Work experience</h2>
-        <p class="section-subtitle">
-          Recent roles and responsibilities based on my latest resume.
-        </p>
+    <section class="section-experience" id="experience">
+      <div class="container py-5">
+        <div class="row mb-5">
+          <div class="col text-center reveal">
+            <p class="section-kicker">Experience</p>
+            <h2 class="exp-section-title">Where I’ve shipped</h2>
+            <p class="exp-section-sub">E-commerce, travel ops, telecom/ICT, and international project work.</p>
+          </div>
+        </div>
 
-        <div class="row">
+        <div class="timeline">
           {experience.map((e) => (
-            <div class="col-12 mb-4">
-              <article class="hero-card">
-                <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;">
+            <div class="timeline-item mb-5 reveal">
+              <span class="timeline-dot"></span>
+              <article class="card exp-card border-0 shadow-sm p-4 ml-3">
+                <div class="d-flex align-items-center mb-3 exp-card-head">
+                  {e.logo ? (
+                    <img src={e.logo} alt="" width="48" height="48" class="rounded exp-logo" loading="lazy" />
+                  ) : (
+                    <div class="exp-logo-fallback rounded" aria-hidden="true">
+                      {e.company.charAt(0)}
+                    </div>
+                  )}
                   <div>
-                    <h3 style="margin:0;font-weight:900;">{e.title}</h3>
-                    <div class="small-muted" style="margin-top:4px;">{e.company} • {e.location}</div>
+                    <h3 class="exp-role mb-0">{e.title}</h3>
+                    <span class="exp-company">
+                      {e.companyUrl ? (
+                        <a href={e.companyUrl} class="text-decoration-none" target="_blank" rel="noopener noreferrer">
+                          {e.company}
+                        </a>
+                      ) : (
+                        e.company
+                      )}
+                    </span>
                   </div>
-                  <div class="chip" style="height:fit-content;">{e.start} → {e.end}</div>
                 </div>
-                <ul class="list-muted">
+                <div class="text-muted small mb-3">
+                  {e.start} – {e.end} · {e.location}
+                </div>
+                <p class="mb-3 exp-summary">{e.summary}</p>
+                <h4 class="exp-achievements-label">What I worked on</h4>
+                <ul class="mb-3 exp-bullets">
                   {e.bullets.map((b) => (
                     <li>{b}</li>
                   ))}
                 </ul>
+                {e.stack?.length ? (
+                  <div class="d-flex flex-wrap exp-badges">
+                    {e.stack.map((s) => (
+                      <span class="badge exp-badge">{s}</span>
+                    ))}
+                  </div>
+                ) : null}
               </article>
             </div>
           ))}
@@ -444,72 +655,162 @@ const education = [
       </div>
     </section>
 
-    <section class="section" id="projects">
+    <section class="section section-alt" id="projects">
       <div class="container">
-        <h2 class="section-title">Featured projects</h2>
-        <p class="section-subtitle">
-          A few projects that represent my day-to-day work: backend APIs, business workflows, and production-ready UI.
-        </p>
+        <header class="project-section-head reveal">
+          <p class="section-kicker">Projects</p>
+          <h2 class="section-lead">Selected work</h2>
+          <p class="section-desc">
+            A selection of projects that showcase practical software for business operations, automation, and delivery.
+          </p>
+        </header>
 
-        <div class="row g-4">
-          {featuredProjects.map((p) => (
-            <div class="col-md-6 col-lg-4">
-              <article class="card-neo">
-                <div class="card-media">
-                  <img src={p.image} alt={`${p.title} screenshot`} loading="lazy" />
+        <div class="project-showcase">
+          {featuredProjects.map((p) => {
+            const visibleStack = p.stack.slice(0, 5);
+            const moreCount = Math.max(0, p.stack.length - visibleStack.length);
+            const detailUrl = `${baseUrl}projects/${p.slug}/`;
+            return (
+              <article class="project-card reveal">
+                <div class="project-card-media">
+                  <a href={detailUrl} class="project-card-image-link">
+                    <img src={p.image} alt={`${p.title} screenshot`} loading="lazy" />
+                  </a>
                 </div>
-                <div class="card-body-neo">
-                  <h3 class="card-title-neo">{p.title}</h3>
-                  <p class="card-text-neo">{p.description}</p>
-                  {p.role ? <div class="small-muted" style="margin-bottom:8px;">Role: <strong>{p.role}</strong></div> : null}
-                  {p.impact ? <div class="small-muted" style="margin-bottom:10px;">Impact: {p.impact}</div> : null}
-                  {p.highlights?.length ? (
-                    <ul class="list-muted" style="margin-top:0;margin-bottom:12px;">
-                      {p.highlights.map((h) => (
-                        <li>{h}</li>
-                      ))}
-                    </ul>
-                  ) : null}
-                  <div class="chip-row" aria-label="tech stack">
-                    {p.stack.map((s) => (
-                      <span class="chip">{s}</span>
+                <div class="project-card-body">
+                  <h3 class="project-card-title">
+                    <a href={detailUrl} class="project-card-title-link">{p.title}</a>
+                  </h3>
+                  <p class="project-card-company">{p.company}</p>
+                  <p class="project-card-desc">{p.description}</p>
+                  <div class="project-card-tags" aria-label="tech stack">
+                    {visibleStack.map((s) => (
+                      <span class="project-tag">{s}</span>
                     ))}
+                    {moreCount > 0 ? <span class="project-tag project-tag-more">+{moreCount} more</span> : null}
                   </div>
-                  <div class="card-actions">
+                  <div class="project-card-actions">
+                    <a class="link-btn" href={detailUrl}>
+                      Details
+                    </a>
                     {p.liveUrl ? (
-                      <a class="link-btn" href={p.liveUrl} target="_blank" rel="noreferrer">
-                        <i class="fa fa-external-link" aria-hidden="true"></i> Live
-                      </a>
-                    ) : null}
-                    {p.repoUrl ? (
-                      <a class="link-btn" href={p.repoUrl} target="_blank" rel="noreferrer">
-                        <i class="fa fa-github" aria-hidden="true"></i> Code
+                      <a class="link-btn" href={p.liveUrl} target="_blank" rel="noopener noreferrer">
+                        <i class="fa fa-external-link" aria-hidden="true"></i> Live <span class="sr-only">(opens in a new tab)</span>
                       </a>
                     ) : null}
                   </div>
                 </div>
               </article>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="what-i-do">
+      <div class="container">
+        <header class="section-head reveal">
+          <p class="section-kicker">Capabilities</p>
+          <h2 class="section-lead">What I Do</h2>
+          <p class="section-desc">The kinds of work I usually end up doing.</p>
+        </header>
+        <div class="row">
+          {whatIDo.map((item) => (
+            <div class="col-md-6 col-lg-4 mb-4 reveal">
+              <div class="service-card h-100">
+                <h3 class="service-title">{item.title}</h3>
+                <p class="service-text">{item.text}</p>
+              </div>
             </div>
           ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="beyond-coding">
+      <div class="container">
+        <header class="section-head reveal">
+          <p class="section-kicker">Beyond the IDE</p>
+          <h2 class="section-lead">Beyond Coding</h2>
+          <p class="section-desc">
+            Writing features is only part of it — a lot of the job is process, data, and people.
+          </p>
+        </header>
+        <div class="row">
+          {beyondCoding.map((item) => (
+            <div class="col-md-6 col-lg-4 mb-4 reveal">
+              <div class="skill-box h-100">
+                <h3>{item.title}</h3>
+                <div class="small-muted">{item.text}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="how-i-work">
+      <div class="container">
+        <header class="section-head reveal">
+          <p class="section-kicker">Process</p>
+          <h2 class="section-lead">How I Work</h2>
+          <p class="section-desc">I like understanding the problem before locking in a technical approach.</p>
+        </header>
+        <div class="hero-card work-process reveal">
+          <div class="work-steps" aria-label="Work process">
+            <span class="work-step">Understand</span>
+            <span class="work-step-arrow" aria-hidden="true">→</span>
+            <span class="work-step">Build</span>
+            <span class="work-step-arrow" aria-hidden="true">→</span>
+            <span class="work-step">Check</span>
+            <span class="work-step-arrow" aria-hidden="true">→</span>
+            <span class="work-step">Ship</span>
+            <span class="work-step-arrow" aria-hidden="true">→</span>
+            <span class="work-step">Fix</span>
+          </div>
+          <div class="work-copy">
+            <p>
+              I aim for something the team can actually use and maintain — not just something that demos well once.
+            </p>
+            <p>
+              Fine taking a feature from “we need this” through development, testing help, deploy support, and later
+              tweaks when real usage shows gaps.
+            </p>
+          </div>
         </div>
       </div>
     </section>
 
     <section class="section section-alt" id="education">
       <div class="container">
-        <h2 class="section-title">Education</h2>
-        <p class="section-subtitle">Academic foundation and professional training.</p>
+        <header class="section-head reveal">
+          <p class="section-kicker">Background</p>
+          <h2 class="section-lead">Education</h2>
+          <p class="section-desc">Degree plus professional training that shaped how I build software.</p>
+        </header>
+
         <div class="row">
           {education.map((e) => (
-            <div class="col-lg-6 mb-4">
-              <div class="hero-card">
-                <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;">
-                  <div>
-                    <h3 style="margin:0;font-weight:900;">{e.degree}</h3>
-                    <div class="small-muted" style="margin-top:4px;">{e.org}</div>
-                  </div>
-                  <div class="chip" style="height:fit-content;">{e.time}</div>
+            <div class="col-md-4 mb-4 reveal">
+              <div class="hero-card h-100 edu-card">
+                <div class="edu-card-top">
+                  <div class="small-muted">Education</div>
+                  <div class="chip">{e.time}</div>
                 </div>
+                <h3 class="item-title">{e.degree}</h3>
+                <div class="small-muted" style="margin-top:4px;">{e.org}</div>
+              </div>
+            </div>
+          ))}
+          {training.map((e) => (
+            <div class="col-md-4 mb-4 reveal">
+              <div class="hero-card h-100 edu-card">
+                <div class="edu-card-top">
+                  <div class="small-muted">{e.kind}</div>
+                  <div class="chip">{e.time}</div>
+                </div>
+                <h3 class="item-title">{e.degree}</h3>
+                <div class="small-muted" style="margin-top:4px;">{e.org}</div>
               </div>
             </div>
           ))}
@@ -517,42 +818,66 @@ const education = [
       </div>
     </section>
 
-    <section class="section" id="contact">
-      <div class="container">
-        <h2 class="section-title">Get in touch</h2>
-        <p class="section-subtitle">
-          Open to collaboration, product work, and backend/API engineering roles.
+    <section class="section cta-band" id="hire">
+      <div class="container reveal">
+        <p class="section-eyebrow">Start here</p>
+        <h2 class="cta-title">
+          Bring me the problem.<br />
+          I’ll help ship a fix.
+        </h2>
+        <p class="section-subtitle" style="margin-bottom:20px;">
+          A slow report, an ops process stuck in spreadsheets, an API that keeps breaking, a Laravel app that needs
+          someone who’s lived in production. Tell me what you’re trying to fix.
         </p>
+        <div class="hero-actions">
+          <a class="btn-primary-neo" href={`mailto:${profile.email}`}>Email me</a>
+          <a class="btn-ghost" href={profile.links.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a class="btn-ghost" href={profile.resumeUrl} target="_blank" rel="noopener noreferrer">View Resume</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="contact">
+      <div class="container">
+        <header class="section-head reveal">
+          <p class="section-kicker">Contact</p>
+          <h2 class="section-lead">Let’s talk</h2>
+          <p class="section-desc">Recruiter, tech lead, or founder — skip the long pitch and say what you need.</p>
+        </header>
+
         <div class="row g-4">
-          <div class="col-lg-7">
+          <div class="col-lg-5 reveal">
             <div class="hero-card">
-              <h3 style="margin:0 0 10px;font-weight:900;">My approach</h3>
-              <p class="hero-lead" style="margin:0;">
-                I’m comfortable owning features end-to-end: requirements → implementation → testing → deployment support.
-                I care about maintainability (clear naming, reusable components, small PRs) and performance (fast pages, efficient queries).
-              </p>
+              <div class="contact-line">
+                <span class="small-muted">Email</span>
+                <a href={`mailto:${profile.email}`}>{profile.email}</a>
+              </div>
+              <div class="contact-line">
+                <span class="small-muted">Phone</span>
+                <span>{profile.phone}</span>
+              </div>
+              <div class="contact-line">
+                <span class="small-muted">LinkedIn</span>
+                <a href={profile.links.linkedin} target="_blank" rel="noopener noreferrer">linkedin.com/in/sshanto13</a>
+              </div>
+              <div class="contact-line">
+                <span class="small-muted">GitHub</span>
+                <a href={profile.links.github} target="_blank" rel="noopener noreferrer">github.com/sshanto13</a>
+              </div>
+              <div class="contact-line" style="margin-bottom:0;">
+                <span class="small-muted">Location</span>
+                <span>{profile.location}</span>
+              </div>
             </div>
           </div>
-          <div class="col-lg-5">
+          <div class="col-lg-7 reveal">
             <div class="hero-card">
-              <h3 style="margin:0 0 10px;font-weight:900;">Let’s connect</h3>
-              <p class="hero-lead" style="margin:0 0 14px;">
-                Email or message me—happy to chat.
-              </p>
-              <div class="card-actions">
-                <a class="link-btn" href={`mailto:${profile.email}`}>
-                  <i class="fa fa-envelope" aria-hidden="true"></i> Email
-                </a>
-                <a class="link-btn" href={profile.links.linkedin} target="_blank" rel="noreferrer">
-                  <i class="fa fa-linkedin" aria-hidden="true"></i> Message on LinkedIn
-                </a>
-                <a class="link-btn" href={profile.links.github} target="_blank" rel="noreferrer">
-                  <i class="fa fa-github" aria-hidden="true"></i> View GitHub
-                </a>
-              </div>
-              <div class="small-muted" style="margin-top:12px;">
-                {profile.email} • {profile.phone}
-              </div>
+              <h3 class="item-title" style="margin-bottom:12px;">Where I’m Most Useful</h3>
+              <ul class="useful-list">
+                {usefulFor.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
             </div>
           </div>
         </div>
@@ -563,11 +888,10 @@ const education = [
   <footer class="site-footer">
     <div class="container d-flex flex-column flex-md-row justify-content-between align-items-start gap-2">
       <div>
-        <div style="font-weight:900;">{profile.name}</div>
-        <div class="small-muted">{profile.title} • {profile.location}</div>
+        <div style="font-weight:800;">{profile.name}</div>
+        <div class="small-muted">Software engineer · {profile.location}</div>
       </div>
-      <div class="small-muted">© {year} • Built with Astro</div>
+      <div class="small-muted">© {year}</div>
     </div>
   </footer>
 </BaseLayout>
-

@@ -1,0 +1,202 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { featuredProjects, getProjectBySlug } from '../../data/projects';
+
+export function getStaticPaths() {
+  return featuredProjects.map((p) => ({ params: { slug: p.slug } }));
+}
+
+const { slug } = Astro.params;
+const project = getProjectBySlug(slug!);
+if (!project) {
+  throw new Error(`Unknown project: ${slug}`);
+}
+
+const baseUrl = import.meta.env.BASE_URL;
+const sections = [
+  { id: 'overview', label: 'Overview' },
+  { id: 'achievements', label: 'Achievements' },
+  { id: 'challenges', label: 'Challenges & Learnings' },
+  { id: 'role', label: 'Role & Contributions' },
+  { id: 'technical', label: 'Technical Details' },
+  { id: 'technologies', label: 'Technologies' },
+  { id: 'future', label: 'Future Plans' },
+];
+---
+
+<BaseLayout
+  title={`${project.title} | Sumon Ray`}
+  description={project.description}
+  canonicalPath={`/projects/${project.slug}/`}
+>
+  <header class="site-nav" id="siteNav">
+    <nav class="fk-nav container" aria-label="Primary">
+      <a class="fk-nav-brand" href={baseUrl} aria-label="Sumon Ray home">
+        <span class="fk-nav-logo">Sumon Ray</span>
+      </a>
+      <div class="fk-nav-links" id="navLinks">
+        <a class="fk-nav-link" href={`${baseUrl}#about`}>About</a>
+        <a class="fk-nav-link" href={`${baseUrl}#projects`}>Projects</a>
+        <a class="fk-nav-link" href={`${baseUrl}#experience`}>Experience</a>
+        <a class="fk-nav-link" href={`${baseUrl}#skills`}>Skills</a>
+      </div>
+      <a class="fk-nav-contact" href={`${baseUrl}#contact`}>Contact</a>
+      <button class="fk-theme-toggle" type="button" aria-label="Switch to dark mode" title="Toggle theme">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4"></circle>
+          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path>
+        </svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <path d="M21 14.5A8.5 8.5 0 0 1 9.5 3 7 7 0 1 0 21 14.5z"></path>
+        </svg>
+      </button>
+      <button class="fk-nav-toggle" type="button" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </header>
+
+  <main class="project-detail">
+    <div class="container">
+      <nav class="project-breadcrumb" aria-label="Breadcrumb">
+        <a href={baseUrl}>Home</a>
+        <span aria-hidden="true">/</span>
+        <a href={`${baseUrl}#projects`}>Projects</a>
+        <span aria-hidden="true">/</span>
+        <span>{project.title}</span>
+      </nav>
+
+      <header class="project-detail-hero reveal is-in">
+        <p class="project-detail-company">{project.company}</p>
+        <h1 class="project-detail-title">{project.title}</h1>
+        <p class="project-detail-lead">{project.description}</p>
+        <div class="project-detail-actions">
+          {project.liveUrl ? (
+            <a class="btn-primary-neo" href={project.liveUrl} target="_blank" rel="noreferrer">
+              View live
+            </a>
+          ) : null}
+          <a class="btn-ghost" href={`${baseUrl}#projects`}>Back to projects</a>
+        </div>
+        <div class="project-detail-cover">
+          <img src={`${baseUrl}${project.image}`} alt={`${project.title} screenshot`} loading="eager" />
+        </div>
+      </header>
+
+      <div class="project-detail-layout">
+        <aside class="project-detail-nav" aria-label="On this page">
+          <p class="project-detail-nav-title">On this page</p>
+          <ul>
+            {sections.map((s) => (
+              <li>
+                <a href={`#${s.id}`}>⸺ {s.label}</a>
+              </li>
+            ))}
+          </ul>
+        </aside>
+
+        <div class="project-detail-content">
+          <section class="project-detail-section" id="overview">
+            <h2>Overview</h2>
+            {project.overview.map((p) => (
+              <p>{p}</p>
+            ))}
+          </section>
+
+          <section class="project-detail-section" id="achievements">
+            <h2>Achievements</h2>
+            <ul class="project-detail-list">
+              {project.achievements.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          </section>
+
+          <section class="project-detail-section" id="challenges">
+            <h2>Challenges &amp; Learnings</h2>
+            {project.challenges.map((c) => (
+              <div class="project-challenge">
+                <h3>{c.title}</h3>
+                {c.challenges?.length ? (
+                  <>
+                    <h4>Challenges</h4>
+                    <ul class="project-detail-list">
+                      {c.challenges.map((item) => (
+                        <li>{item}</li>
+                      ))}
+                    </ul>
+                  </>
+                ) : null}
+                <h4>Learnings</h4>
+                <ul class="project-detail-list">
+                  {c.learnings.map((item) => (
+                    <li>{item}</li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </section>
+
+          <section class="project-detail-section" id="role">
+            <h2>Role &amp; Contributions</h2>
+            {project.role ? <p class="project-detail-role">Role: {project.role}</p> : null}
+            {project.contributions.map((block) => (
+              <div class="project-contrib">
+                <h3>{block.title}</h3>
+                <ul class="project-detail-list">
+                  {block.items.map((item) => (
+                    <li>{item}</li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </section>
+
+          <section class="project-detail-section" id="technical">
+            <h2>Technical Details</h2>
+            <ul class="project-detail-list">
+              {project.technicalDetails.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          </section>
+
+          <section class="project-detail-section" id="technologies">
+            <h2>Technologies</h2>
+            <div class="project-tech-groups">
+              {project.technologies.map((group) => (
+                <div class="project-tech-group">
+                  <h3>{group.label}</h3>
+                  <div class="project-card-tags">
+                    {group.items.map((t) => (
+                      <span class="project-tag">{t}</span>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          <section class="project-detail-section" id="future">
+            <h2>Future Plans</h2>
+            <ul class="project-detail-list">
+              {project.futurePlans.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          </section>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container d-flex flex-column flex-md-row justify-content-between align-items-start gap-2">
+      <div>
+        <div style="font-weight:800;">Sumon Ray</div>
+        <div class="small-muted">Software engineer · Dhaka, Bangladesh</div>
+      </div>
+      <div class="small-muted">© {new Date().getFullYear()}</div>
+    </div>
+  </footer>
+</BaseLayout>

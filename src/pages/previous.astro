@@ -1,0 +1,812 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const year = new Date().getFullYear();
+const baseUrl = import.meta.env.BASE_URL;
+
+const profile = {
+  name: 'Sumon Ray',
+  title: 'Software Engineer | Full-Stack & Backend Development | Business Applications & Automation',
+  focus: 'Practical software for business operations, automation, data & ICT',
+  shortTitle: 'Software Engineer',
+  location: 'Dhaka, Bangladesh',
+  photoSrc: 'img/ss-linkedin.png',
+  email: 'sumancsediu@gmail.com',
+  phone: '+880 1952 499680',
+  resumeUrl: 'files/Sumon_Ray_Software_Engineer_Portfolio_2026.docx',
+  links: {
+    github: 'https://github.com/sshanto13',
+    linkedin: 'https://linkedin.com/in/sshanto13/',
+    facebook: 'https://fb.com/sshanto21/',
+  },
+};
+
+type Project = {
+  title: string;
+  category?: string;
+  description: string;
+  highlights?: string[];
+  role?: string;
+  image: string;
+  stack: string[];
+  liveUrl?: string;
+  repoUrl?: string;
+};
+
+const featuredProjects: Project[] = [
+  {
+    title: 'Destinique Travel Platform',
+    category: 'Travel · Booking · Business Operations',
+    description:
+      'Customer-facing travel platform supporting travel products, booking workflows, business operations, analytics, and marketing integrations.',
+    role: 'Software Engineer',
+    highlights: [
+      'Travel operations, booking, property management, visitor tracking, promotions, advertising, and reporting',
+    ],
+    image: 'img/screenshots/destinique.png',
+    stack: ['Angular', 'PHP', 'REST API', 'MySQL', 'JavaScript', 'Bootstrap', 'Cloudflare'],
+    liveUrl: 'https://destinique.com/',
+  },
+  {
+    title: 'Destinique Business Dashboard',
+    category: 'Business Application · Automation · Reporting',
+    description:
+      'Internal business platform supporting visitor tracking, advertising, promotions, property management, booking, reporting, and operational workflows.',
+    role: 'Software Engineer',
+    highlights: [
+      'REST APIs, dashboards, and workflow automation for luxury travel operations',
+    ],
+    image: 'img/screenshots/destinique_dashboard_ad_generation.png',
+    stack: ['PHP', 'MySQL', 'JavaScript', 'REST API', 'Bootstrap', 'Cloudflare'],
+    liveUrl: 'https://quote.destinique.com/destin/dashboard/',
+  },
+  {
+    title: 'PaiMart — Wholesale E-commerce',
+    category: 'E-commerce · ERP · POS · Business Operations',
+    description:
+      'Wholesale e-commerce and business platform supporting products, customers, orders, inventory, sales, reporting, and operational workflows.',
+    role: 'Assistant Manager, Engineering',
+    highlights: [
+      'Laravel/MySQL backend, REST APIs, and operational features for retail and wholesale',
+    ],
+    image: 'img/screenshots/paimart.png',
+    stack: ['Laravel', 'PHP', 'MySQL', 'JavaScript', 'REST API'],
+    liveUrl: 'https://paimart.painest.com/',
+  },
+  {
+    title: 'JS ERP — Sales, Billing & Inventory',
+    category: 'ERP · Business Automation',
+    description:
+      'Business management system supporting sales, invoicing, billing, inventory, employee management, and operational reporting.',
+    role: 'Backend Engineer',
+    image: 'img/portfolio/js-erp.png',
+    stack: ['Laravel', 'PHP', 'MySQL', 'JavaScript'],
+    liveUrl: 'https://js-erp.paitechno.com',
+  },
+  {
+    title: 'E-commerce Operations — Back Office',
+    category: 'Business Automation · Operations',
+    description:
+      'Internal back-office system supporting product, order, inventory, and e-commerce operations.',
+    role: 'Backend Engineer',
+    image: 'img/portfolio/paikaree.png',
+    stack: ['Laravel', 'PHP', 'MySQL', 'JavaScript'],
+    liveUrl: 'https://operation.paikaree.com.bd/',
+  },
+  {
+    title: 'NGTE Welfare Trust — Government ICT System',
+    category: 'Government · ICT · Workflow Management',
+    description:
+      'Government information and application management system supporting application processing, tracking, document generation, and administrative workflows.',
+    role: 'Software Engineer',
+    image: 'img/portfolio/terbb.png',
+    stack: ['Laravel', 'PHP', 'MySQL', 'JavaScript'],
+    liveUrl: 'https://apps.ngte-welfaretrust.gov.bd/',
+  },
+];
+
+const whatIDo = [
+  {
+    title: 'Software Engineering',
+    text: 'Building and maintaining reliable web applications, APIs, backend services, and business software for production use.',
+  },
+  {
+    title: 'Full-Stack Development',
+    text: 'Working across backend and frontend layers to deliver complete business applications end to end.',
+  },
+  {
+    title: 'Business Applications',
+    text: 'Developing software that supports real operational processes—ERP, POS, e-commerce, booking, and inventory.',
+  },
+  {
+    title: 'Business Automation',
+    text: 'Replacing repetitive manual processes with digital workflows, internal tools, integrations, and dashboards.',
+  },
+  {
+    title: 'Data & Reporting',
+    text: 'Working with databases, reporting workflows, dashboards, data analysis, and operational information.',
+  },
+  {
+    title: 'ICT & Enterprise Solutions',
+    text: 'Supporting enterprise apps, government ICT systems, integrations, deployment, troubleshooting, and production operations.',
+  },
+];
+
+const skillGroups: { title: string; skills: string[] }[] = [
+  {
+    title: 'Programming & Backend',
+    skills: [
+      'PHP',
+      'Laravel',
+      'Node.js',
+      'Python',
+      'JavaScript',
+      'TypeScript',
+      'REST API',
+      'OOP / SOLID',
+      'Inertia.js',
+      'Filament',
+    ],
+  },
+  {
+    title: 'Frontend',
+    skills: ['Angular', 'React.js', 'Vue.js', 'jQuery', 'AJAX', 'HTML5', 'CSS3', 'Tailwind CSS', 'Bootstrap'],
+  },
+  {
+    title: 'Database & Data',
+    skills: ['MySQL', 'PostgreSQL', 'SQL', 'Database Design', 'Query Optimization', 'Data Analysis'],
+  },
+  {
+    title: 'Reporting & Analytics',
+    skills: ['Power BI', 'Dashboards', 'Reporting', 'Google Analytics 4', 'Facebook Conversion API'],
+  },
+  {
+    title: 'Cloud & DevOps',
+    skills: ['AWS EC2', 'AWS RDS', 'AWS SES', 'Cloudflare', 'DigitalOcean', 'Vultr', 'Docker', 'Git', 'GitHub', 'GitLab', 'CI/CD'],
+  },
+  {
+    title: 'AI-Assisted Development',
+    skills: ['ChatGPT', 'Claude', 'Gemini', 'Cursor AI', 'Code Review', 'Technical Research', 'Documentation'],
+  },
+];
+
+type Experience = {
+  company: string;
+  companyUrl?: string;
+  logo?: string;
+  title: string;
+  location: string;
+  start: string;
+  end: string;
+  summary: string;
+  bullets: string[];
+  stack?: string[];
+};
+
+const experience: Experience[] = [
+  {
+    company: 'Destinique Travel LLC',
+    companyUrl: 'https://destinique.com/',
+    logo: 'img/screenshots/destinique.png',
+    title: 'Software Engineer',
+    location: 'Dhaka, Bangladesh',
+    start: 'Feb 2025',
+    end: 'Present',
+    summary:
+      'Developing and maintaining internal software products supporting travel and property operations, with APIs, dashboards, and workflow automation.',
+    bullets: [
+      'Developed internal systems for visitor tracking, advertising, promotions, property management, and booking.',
+      'Built REST APIs, dashboards, database-driven applications, and workflow automation for business operations.',
+      'Contributed to the Angular customer-facing platform and PHP/Laravel backend integrations.',
+      'Optimized database queries and application workflows; investigated and resolved production issues.',
+      'Collaborated with business and technical teams to translate requirements into practical software solutions.',
+      'Supported deployment, analytics, infrastructure, and production maintenance.',
+    ],
+    stack: ['PHP', 'Laravel', 'MySQL', 'Angular', 'JavaScript', 'REST API', 'Cloudflare', 'VPS'],
+  },
+  {
+    company: 'PaiMart by PaiNest — JS Enterprise Ltd.',
+    companyUrl: 'https://paimart.painest.com/',
+    logo: 'img/screenshots/paimart.png',
+    title: 'Assistant Manager, Engineering',
+    location: 'Dhaka, Bangladesh',
+    start: 'Jan 2021',
+    end: 'Jan 2025',
+    summary:
+      'Delivered e-commerce and business systems supporting retail and wholesale operations across ERP, POS, APIs, and internal tools.',
+    bullets: [
+      'Developed and maintained e-commerce, ERP, POS, API, and internal business applications.',
+      'Worked on products, customers, orders, inventory, sales, payments, reporting, and operational workflows.',
+      'Designed database structures and optimized SQL queries for production systems.',
+      'Developed REST APIs and integrations for frontend and mobile applications.',
+      'Built internal tools and dashboards for business monitoring and operations.',
+      'Worked with business stakeholders to understand requirements and deliver practical solutions.',
+      'Supported production troubleshooting, deployment, testing, and maintenance.',
+    ],
+    stack: ['PHP', 'Laravel', 'MySQL', 'JavaScript', 'REST API', 'jQuery', 'ERP', 'POS', 'Git', 'VPS'],
+  },
+  {
+    company: 'ADN Telecom PLC',
+    companyUrl: 'https://www.adnsl.com/',
+    logo: 'img/portfolio/adncloud.png',
+    title: 'Assistant Manager, Engineering',
+    location: 'Gulshan, Dhaka, Bangladesh',
+    start: 'Oct 2019',
+    end: 'Jan 2021',
+    summary:
+      'Built enterprise web applications and backend services, including government ICT systems for application processing and information management.',
+    bullets: [
+      'Developed enterprise web applications, backend services, and REST APIs using PHP/Laravel.',
+      'Worked on a government ICT system for NGTE Welfare Trust covering application processing, tracking, and documents.',
+      'Developed application processing, tracking, document generation, and information-management workflows.',
+      'Worked on database design, testing, deployment, troubleshooting, and maintenance.',
+    ],
+    stack: ['PHP', 'Laravel', 'MySQL', 'JavaScript', 'REST API', 'Bootstrap'],
+  },
+  {
+    company: 'NYBSYS Inc.',
+    companyUrl: 'https://nybsys.com/',
+    logo: 'img/portfolio/nybsys.png',
+    title: 'Software Engineer',
+    location: 'Mirpur, Dhaka, Bangladesh',
+    start: 'Dec 2017',
+    end: 'Sep 2019',
+    summary:
+      'Developed web applications, responsive interfaces, and API integrations for international projects with distributed teams.',
+    bullets: [
+      'Developed web applications, responsive interfaces, and API integrations.',
+      'Worked with distributed teams on web, mobile, IoT, LTE, and telecommunications projects.',
+      'Translated technical and UI requirements into production-ready applications.',
+      'Participated in development, testing, debugging, integration, and delivery.',
+    ],
+    stack: ['PHP', 'JavaScript', 'HTML', 'CSS', 'API Integration'],
+  },
+  {
+    company: 'ICT Division — Learning & Earning Development Project',
+    companyUrl: 'https://ictd.gov.bd/',
+    logo: 'img/logos/ictd.png',
+    title: 'Trainer',
+    location: 'Dhaka, Bangladesh',
+    start: 'Dec 2016',
+    end: 'Apr 2017',
+    summary:
+      'Delivered practical web development training to approximately 200 learners across foundational technologies.',
+    bullets: [
+      'Trained approximately 200 learners in HTML, CSS, PHP, WordPress, and MySQL.',
+      'Conducted practical development sessions and technical knowledge transfer.',
+    ],
+    stack: ['HTML', 'CSS', 'PHP', 'WordPress', 'MySQL'],
+  },
+];
+
+const beyondCoding = [
+  {
+    title: 'Business Process Understanding',
+    text: 'Understanding how software fits into real business operations rather than treating applications as isolated technical projects.',
+  },
+  {
+    title: 'Automation',
+    text: 'Turning repetitive manual processes into software workflows, dashboards, integrations, and internal tools.',
+  },
+  {
+    title: 'Data',
+    text: 'Working with operational data, SQL databases, reporting requirements, dashboards, and data accuracy.',
+  },
+  {
+    title: 'Problem Solving',
+    text: 'Investigating application errors, database problems, integration issues, performance bottlenecks, and production incidents.',
+  },
+  {
+    title: 'Collaboration',
+    text: 'Working with developers, QA, business users, managers, frontend/mobile teams, and international stakeholders.',
+  },
+];
+
+const careerInterests = [
+  {
+    title: 'Software Engineering',
+    items: ['Software Engineer', 'Senior Software Engineer', 'Backend Developer', 'Full-Stack Developer', 'PHP/Laravel', 'Node.js', 'Python'],
+  },
+  {
+    title: 'Business Systems',
+    items: ['Business Application Developer', 'ERP Developer', 'Application Specialist', 'Systems Analyst'],
+  },
+  {
+    title: 'Automation & Digital Transformation',
+    items: ['Business Automation', 'Digital Transformation', 'Process Automation', 'Technology Solutions'],
+  },
+  {
+    title: 'Data & Reporting',
+    items: ['Reporting', 'Dashboard Development', 'Data Analysis', 'Power BI', 'Business Intelligence'],
+  },
+  {
+    title: 'ICT & Technology Operations',
+    items: ['ICT Specialist', 'IT Systems', 'Application Support', 'Technical Operations'],
+  },
+  {
+    title: 'Future Growth Areas',
+    items: ['Technical Project Management', 'Product Management', 'Product Ownership', 'IT Management'],
+  },
+];
+
+const education = [
+  {
+    degree: 'B.Sc. in Computer Science & Engineering',
+    org: 'Dhaka International University',
+    time: '2010 – 2015',
+  },
+  {
+    degree: 'Web Application Development with PHP',
+    org: 'BITM, BASIS',
+    time: '2015',
+  },
+  {
+    degree: 'Web Design & Development',
+    org: 'DIIT',
+    time: '2012',
+  },
+];
+
+const stats = [
+  { value: '8+', label: 'Years of Experience' },
+  { value: '5+', label: 'Years in E-commerce & Business Systems' },
+  { value: '20+', label: 'Business & ICT Solutions' },
+  { value: '200+', label: 'Learners Trained' },
+];
+---
+
+<BaseLayout
+  title={`${profile.name} — Software Engineer | Full-Stack, Backend & Business Applications`}
+  description="Software Engineer with 8+ years experience building web applications, business systems, APIs, automation, and ICT solutions. Strong PHP/Laravel foundation with working knowledge of Node.js and Python."
+  canonicalPath="/"
+  structuredData={{
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: profile.name,
+    jobTitle: 'Software Engineer',
+    url: Astro.site ?? 'https://sshanto13.github.io',
+    image: new URL(profile.photoSrc, Astro.site ?? 'https://sshanto13.github.io').toString(),
+    email: `mailto:${profile.email}`,
+    telephone: profile.phone,
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Dhaka',
+      addressCountry: 'BD',
+    },
+    sameAs: [profile.links.github, profile.links.linkedin, profile.links.facebook],
+  }}
+>
+  <div class="compare-banner">
+    Previous draft for comparison · <a href={baseUrl}>Back to current homepage</a>
+  </div>
+  <header class="site-nav">
+    <nav class="container nav-inner navbar navbar-expand-lg navbar-light">
+      <a class="brand" href="#top">
+        <span class="brand-badge">SR</span>
+        <span>{profile.name}</span>
+      </a>
+
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navLinks"
+        aria-controls="navLinks"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navLinks">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#what-i-do">What I Do</a></li>
+          <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+          <li class="nav-item"><a class="nav-link" href="#experience">Experience</a></li>
+          <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+          <li class="nav-item"><a class="nav-link" href="#opportunities">Opportunities</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+          <li class="nav-item">
+            <a class="nav-link" href={profile.resumeUrl} target="_blank" rel="noreferrer">CV</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container">
+        <div class="row g-4 align-items-center">
+          <div class="col-lg-5 order-1 order-lg-2">
+            <div class="profile">
+              <div class="profile-frame">
+                <img src={profile.photoSrc} alt={`${profile.name} profile photo`} loading="eager" />
+              </div>
+              <div class="mt-3 social">
+                <a class="link-btn" href={profile.links.linkedin} target="_blank" rel="noreferrer">
+                  <i class="fa fa-linkedin" aria-hidden="true"></i> LinkedIn
+                </a>
+                <a class="link-btn" href={profile.links.github} target="_blank" rel="noreferrer">
+                  <i class="fa fa-github" aria-hidden="true"></i> GitHub
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-7 order-2 order-lg-1">
+            <div class="hero-card">
+              <span class="hero-kicker">
+                <i class="fa fa-briefcase" aria-hidden="true"></i>
+                Open to New Opportunities
+              </span>
+
+              <h1 class="hero-title">{profile.name}</h1>
+              <p class="hero-role">{profile.title}</p>
+              <p class="hero-focus">{profile.focus}</p>
+              <p class="hero-lead">
+                Software Engineer with <strong>8+ years</strong> of experience building web applications, business
+                systems, APIs, dashboards, and digital solutions for local and global clients.
+              </p>
+              <p class="hero-lead">
+                Experience covers software development, backend and full-stack engineering, e-commerce, ERP/POS,
+                business automation, reporting, data-driven applications, enterprise systems, and ICT solutions.
+              </p>
+              <p class="hero-lead">{profile.location} · Open to New Opportunities</p>
+
+              <div class="hero-actions">
+                <a class="btn-primary-neo" href="#projects">
+                  <i class="fa fa-briefcase" aria-hidden="true"></i> View Projects
+                </a>
+                <a class="btn-ghost" href={profile.resumeUrl} target="_blank" rel="noreferrer">
+                  <i class="fa fa-download" aria-hidden="true"></i> Download CV
+                </a>
+                <a class="btn-ghost" href={profile.links.linkedin} target="_blank" rel="noreferrer">
+                  <i class="fa fa-linkedin" aria-hidden="true"></i> LinkedIn
+                </a>
+                <a class="btn-ghost" href={profile.links.github} target="_blank" rel="noreferrer">
+                  <i class="fa fa-github" aria-hidden="true"></i> GitHub
+                </a>
+              </div>
+
+              <div class="stat-row" aria-label="quick stats">
+                {stats.map((s) => (
+                  <div class="stat">
+                    <strong>{s.value}</strong>
+                    <span>{s.label}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="about">
+      <div class="container">
+        <h2 class="section-title">About Me</h2>
+        <p class="section-subtitle">
+          I am a Software Engineer with more than 8 years of experience building and maintaining software for real-world
+          business operations.
+        </p>
+        <p class="section-subtitle" style="margin-top:-10px;">
+          I started my career in web development and gradually moved into backend engineering, full-stack development,
+          business applications, APIs, ERP/POS, e-commerce platforms, reporting systems, and workflow automation.
+        </p>
+        <p class="section-subtitle" style="margin-top:-10px;">
+          Over the years, I have worked with development teams, business stakeholders, and international clients on
+          systems where reliability, data accuracy, performance, and maintainability matter.
+        </p>
+        <p class="section-subtitle" style="margin-top:-10px;">
+          My strongest technical background is in PHP/Laravel, OOP, SQL, MySQL/PostgreSQL, JavaScript, REST APIs, and
+          database-driven applications. I also have experience with Angular, React, Vue, cloud/VPS environments,
+          analytics, dashboards, and modern AI-assisted development tools.
+        </p>
+        <p class="section-subtitle" style="margin-top:-10px;">
+          Strong production experience with PHP/Laravel, with working knowledge of Node.js and Python and the ability to
+          adapt quickly to new backend technologies—building on solid OOP, API, and database fundamentals.
+        </p>
+        <p class="section-subtitle" style="margin-top:-10px;">
+          I am currently open to opportunities where I can contribute not only as a developer, but also in business
+          systems, automation, digital transformation, data/reporting, and broader ICT initiatives.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="what-i-do">
+      <div class="container">
+        <h2 class="section-title">What I Do</h2>
+        <p class="section-subtitle">
+          Capability areas I bring to software and business-technology roles—not a tool list.
+        </p>
+        <div class="row">
+          {whatIDo.map((item, i) => (
+            <div class="col-md-6 col-lg-4 mb-4">
+              <div class="service-card h-100">
+                <div class="service-index">{String(i + 1).padStart(2, '0')}</div>
+                <h3 class="service-title">{item.title}</h3>
+                <p class="service-text">{item.text}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="skills">
+      <div class="container">
+        <h2 class="section-title">Technical Skills</h2>
+        <p class="section-subtitle">
+          Tools and technologies I use day to day across backend, frontend, data, cloud, and delivery.
+        </p>
+        <div class="skill-grid">
+          {skillGroups.map((g) => (
+            <div class="skill-box">
+              <h3>{g.title}</h3>
+              <div class="chip-row">
+                {g.skills.map((s) => (
+                  <span class="chip">{s}</span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section-experience" id="experience">
+      <div class="container py-5">
+        <div class="row mb-5">
+          <div class="col text-center">
+            <h2 class="exp-section-title">Work Experience</h2>
+            <p class="exp-section-sub">
+              Designed and developed scalable enterprise software systems, optimized backend performance, and delivered
+              secure platforms for e-commerce, travel, business operations, and ICT solutions.
+            </p>
+          </div>
+        </div>
+
+        <div class="timeline">
+          {experience.map((e) => (
+            <div class="timeline-item mb-5">
+              <span class="timeline-dot"></span>
+              <div class="card exp-card border-0 shadow-sm p-4 ml-3">
+                <div class="d-flex align-items-center mb-3 exp-card-head">
+                  {e.logo ? (
+                    <img src={e.logo} alt={e.company} width="48" height="48" class="rounded exp-logo" loading="lazy" />
+                  ) : (
+                    <div class="exp-logo-fallback rounded" aria-hidden="true">
+                      {e.company.charAt(0)}
+                    </div>
+                  )}
+                  <div>
+                    <h5 class="exp-role mb-0">{e.title}</h5>
+                    <span class="exp-company">
+                      {e.companyUrl ? (
+                        <a href={e.companyUrl} class="text-decoration-none" target="_blank" rel="noreferrer">
+                          {e.company}
+                        </a>
+                      ) : (
+                        e.company
+                      )}
+                    </span>
+                  </div>
+                </div>
+                <div class="text-muted small mb-3">
+                  {e.start} – {e.end} · {e.location}
+                </div>
+                <p class="mb-3 exp-summary">{e.summary}</p>
+                <h6 class="exp-achievements-label">Key Achievements</h6>
+                <ul class="mb-3 exp-bullets">
+                  {e.bullets.map((b) => (
+                    <li>{b}</li>
+                  ))}
+                </ul>
+                {e.stack?.length ? (
+                  <div class="d-flex flex-wrap exp-badges">
+                    {e.stack.map((s) => (
+                      <span class="badge exp-badge">{s}</span>
+                    ))}
+                  </div>
+                ) : null}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="projects">
+      <div class="container">
+        <h2 class="section-title">Featured Projects</h2>
+        <p class="section-subtitle">
+          Production work across travel, e-commerce, ERP, business operations, and government ICT.
+        </p>
+
+        <div class="row g-4">
+          {featuredProjects.map((p) => (
+            <div class="col-md-6 col-lg-4">
+              <article class="card-neo">
+                <div class="card-media">
+                  <img src={p.image} alt={`${p.title} screenshot`} loading="lazy" />
+                </div>
+                <div class="card-body-neo">
+                  <h3 class="card-title-neo">{p.title}</h3>
+                  {p.category ? <div class="small-muted" style="margin-bottom:10px;">{p.category}</div> : null}
+                  {p.role ? (
+                    <div class="small-muted" style="margin-bottom:10px;">
+                      Role: <strong>{p.role}</strong>
+                    </div>
+                  ) : null}
+                  <div class="chip-row" aria-label="tech stack">
+                    {p.stack.map((s) => (
+                      <span class="chip">{s}</span>
+                    ))}
+                  </div>
+                  <div class="card-actions">
+                    {p.liveUrl ? (
+                      <a class="link-btn" href={p.liveUrl} target="_blank" rel="noreferrer">
+                        <i class="fa fa-external-link" aria-hidden="true"></i> Live
+                      </a>
+                    ) : null}
+                    {p.repoUrl ? (
+                      <a class="link-btn" href={p.repoUrl} target="_blank" rel="noreferrer">
+                        <i class="fa fa-github" aria-hidden="true"></i> Code
+                      </a>
+                    ) : null}
+                  </div>
+                </div>
+              </article>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="beyond-coding">
+      <div class="container">
+        <h2 class="section-title">Beyond Coding</h2>
+        <p class="section-subtitle">
+          Experience goes beyond writing application code—working closely with business processes, operational teams,
+          databases, APIs, infrastructure, reporting, and production systems.
+        </p>
+        <div class="row">
+          {beyondCoding.map((item) => (
+            <div class="col-md-6 col-lg-4 mb-4">
+              <div class="skill-box h-100">
+                <h3>{item.title}</h3>
+                <div class="small-muted">{item.text}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="how-i-work">
+      <div class="container">
+        <h2 class="section-title">How I Work</h2>
+        <p class="section-subtitle">
+          I prefer understanding the business problem before deciding on the technical solution.
+        </p>
+        <div class="hero-card">
+          <p class="hero-lead" style="margin:0 0 12px;">
+            My typical approach is: <strong>Understand → Analyze → Design → Build → Test → Deploy → Improve</strong>
+          </p>
+          <p class="hero-lead" style="margin:0 0 12px;">
+            I focus on solutions that are practical, maintainable, secure, and useful for the people who actually use
+            them.
+          </p>
+          <p class="hero-lead" style="margin:0;">
+            I am comfortable taking ownership of a feature or system from requirements through development, testing,
+            deployment support, and ongoing improvement.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="opportunities">
+      <div class="container">
+        <h2 class="section-title">Open to Opportunities</h2>
+        <p class="section-subtitle">
+          Currently open to roles where software engineering and business-systems experience can create value—without
+          claiming expertise outside that foundation.
+        </p>
+        <div class="row">
+          {careerInterests.map((group) => (
+            <div class="col-md-6 col-lg-4 mb-4">
+              <div class="skill-box h-100">
+                <h3>{group.title}</h3>
+                <div class="chip-row">
+                  {group.items.map((item) => (
+                    <span class="chip">{item}</span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="education">
+      <div class="container">
+        <h2 class="section-title">Education</h2>
+        <p class="section-subtitle">Academic foundation and professional training.</p>
+        <div class="row">
+          {education.map((e) => (
+            <div class="col-lg-6 mb-4">
+              <div class="hero-card">
+                <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;">
+                  <div>
+                    <h3 class="item-title">{e.degree}</h3>
+                    <div class="small-muted" style="margin-top:4px;">{e.org}</div>
+                  </div>
+                  <div class="chip" style="height:fit-content;">{e.time}</div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="container">
+        <h2 class="section-title">Let's Work Together</h2>
+        <p class="section-subtitle">
+          Exploring new opportunities in software engineering, full-stack/backend development, business applications,
+          automation, data and reporting, and ICT solutions.
+        </p>
+        <div class="row g-4">
+          <div class="col-lg-7">
+            <div class="hero-card">
+              <h3 class="item-title" style="margin-bottom:10px;">Looking for someone technical and practical?</h3>
+              <p class="hero-lead" style="margin:0;">
+                If you need someone who understands both the technical side and the business side of software, I'd be
+                happy to connect.
+              </p>
+            </div>
+          </div>
+          <div class="col-lg-5">
+            <div class="hero-card">
+              <h3 class="item-title" style="margin-bottom:10px;">Contact</h3>
+              <p class="hero-lead" style="margin:0 0 14px;">
+                {profile.location}
+              </p>
+              <div class="card-actions">
+                <a class="link-btn" href={`mailto:${profile.email}`}>
+                  <i class="fa fa-envelope" aria-hidden="true"></i> {profile.email}
+                </a>
+                <a class="link-btn" href={profile.links.linkedin} target="_blank" rel="noreferrer">
+                  <i class="fa fa-linkedin" aria-hidden="true"></i> LinkedIn
+                </a>
+                <a class="link-btn" href={profile.links.github} target="_blank" rel="noreferrer">
+                  <i class="fa fa-github" aria-hidden="true"></i> GitHub
+                </a>
+                <a class="link-btn" href={profile.resumeUrl} target="_blank" rel="noreferrer">
+                  <i class="fa fa-download" aria-hidden="true"></i> Download CV
+                </a>
+              </div>
+              <div class="small-muted" style="margin-top:12px;">{profile.phone}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container d-flex flex-column flex-md-row justify-content-between align-items-start gap-2">
+      <div>
+        <div style="font-weight:900;">{profile.name}</div>
+        <div class="small-muted">
+          Software Engineer · Business Applications · Automation · Data & ICT · {profile.location}
+        </div>
+      </div>
+      <div class="small-muted">© {year} · sshanto13.github.io</div>
+    </div>
+  </footer>
+</BaseLayout>
