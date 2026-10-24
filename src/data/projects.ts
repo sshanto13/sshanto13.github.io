@@ -37,7 +37,7 @@ export const featuredProjects: Project[] = [
     category: 'Travel / booking',
     description:
       'Customer-facing travel and property platform covering booking flows, promotions, and property experiences. Contributed across Angular frontend and PHP/Laravel backend APIs used by visitors and the operations team.',
-    role: 'Software Engineer',
+    role: 'Tech Lead — Business Applications & Automation',
     image: 'img/screenshots/destinique.png',
     stack: ['Angular', 'PHP', 'REST API', 'MySQL', 'JavaScript', 'Bootstrap', 'Cloudflare'],
     liveUrl: 'https://destinique.com/',
@@ -113,7 +113,7 @@ export const featuredProjects: Project[] = [
     category: 'Business automation / reporting',
     description:
       'Business automation dashboard for ads, promotions, visitor tracking, monitoring, and operational workflows—helping the team turn day-to-day activity into clearer, actionable visibility.',
-    role: 'Software Engineer',
+    role: 'Tech Lead — Business Applications & Automation',
     image: 'img/screenshots/destinique_dashboard_ad_generation.png',
     stack: ['PHP', 'MySQL', 'JavaScript', 'REST API', 'Bootstrap', 'Cloudflare'],
     liveUrl: 'https://quote.destinique.com/destin/dashboard/',
@@ -184,11 +184,11 @@ export const featuredProjects: Project[] = [
   {
     slug: 'paimart-wholesale-ecommerce',
     title: 'PaiMart — Wholesale E-commerce',
-    company: 'PaiMart / JS Enterprise',
+    company: 'PaiMart / JS Group',
     category: 'E-commerce / ERP',
     description:
       'Wholesale e-commerce and business platform spanning products, orders, inventory, payments, customers, ERP/POS functions, reporting, and APIs—built to support real sales and distribution operations.',
-    role: 'Assistant Manager, Engineering',
+    role: 'Deputy Manager',
     image: 'img/screenshots/paimart.png',
     stack: ['Laravel', 'PHP', 'MySQL', 'JavaScript', 'REST API'],
     liveUrl: 'https://paimart.painest.com/',
@@ -260,11 +260,11 @@ export const featuredProjects: Project[] = [
   {
     slug: 'js-erp-sales-billing-inventory',
     title: 'JS ERP — Sales, Billing & Inventory',
-    company: 'JS Enterprise',
+    company: 'JS Group',
     category: 'ERP',
     description:
       'ERP-style application for sales, billing, and inventory workflows—helping teams manage core commercial operations in one place with reporting and backend reliability in mind.',
-    role: 'Backend Engineer',
+    role: 'Technical Manager — JS Enterprise',
     image: 'img/portfolio/js-erp.png',
     stack: ['Laravel', 'PHP', 'MySQL', 'JavaScript'],
     liveUrl: 'https://js-erp.paitechno.com',
@@ -314,11 +314,11 @@ export const featuredProjects: Project[] = [
   {
     slug: 'ecommerce-operations-back-office',
     title: 'E-commerce Operations — Back Office',
-    company: 'Paikaree / PaiMart',
+    company: 'PaiMart / JS Group',
     category: 'Operations',
     description:
       'Back-office operations portal for e-commerce day-to-day work—supporting inventory, order handling, and business workflows tied to the storefront.',
-    role: 'Backend Engineer',
+    role: 'Deputy Manager',
     image: 'img/portfolio/paikaree.png',
     stack: ['Laravel', 'PHP', 'MySQL', 'JavaScript'],
     liveUrl: 'https://operation.paikaree.com.bd/',
@@ -372,7 +372,7 @@ export const featuredProjects: Project[] = [
     category: 'Government ICT',
     description:
       'Government ICT welfare platform covering application processing, tracking, information management, document generation, and administrative workflows where reliability and data accuracy matter.',
-    role: 'Software Engineer',
+    role: 'Assistant Manager — Engineering',
     image: 'img/portfolio/terbb.png',
     stack: ['Laravel', 'PHP', 'MySQL', 'JavaScript'],
     liveUrl: 'https://apps.ngte-welfaretrust.gov.bd/',

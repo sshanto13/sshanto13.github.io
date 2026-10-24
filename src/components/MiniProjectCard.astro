@@ -1,0 +1,53 @@
+---
+import type { MoreProject } from '../data/moreProjects';
+interface Props {
+  p: MoreProject;
+}
+const { p } = Astro.props;
+const baseUrl = import.meta.env.BASE_URL;
+const detailUrl = p.detailSlug ? `${baseUrl}projects/${p.detailSlug}/` : null;
+const visibleStack = p.stack.slice(0, 5);
+const moreCount = Math.max(0, p.stack.length - visibleStack.length);
+---
+
+<article class="project-card">
+  {p.image ? (
+    <div
+      class="project-card-media project-card-media-zoom"
+      data-lightbox
+      data-live={p.liveUrl}
+      role="button"
+      tabindex="0"
+      aria-label={`View ${p.title} screenshot larger`}
+    >
+      <img src={p.image} alt={`${p.title} screenshot`} loading="lazy" />
+    </div>
+  ) : (
+    <div class="project-card-media">
+      <div class="project-card-placeholder" aria-hidden="true">{p.title}</div>
+    </div>
+  )}
+  <div class="project-card-body">
+    <h4 class="project-card-title">{p.title}</h4>
+    <p class="project-card-company">{p.label}</p>
+    <p class="project-card-desc">{p.description}</p>
+    {visibleStack.length ? (
+      <div class="project-card-tags" aria-label="tech stack">
+        {visibleStack.map((s) => (
+          <span class="project-tag">{s}</span>
+        ))}
+        {moreCount > 0 ? <span class="project-tag project-tag-more">+{moreCount} more</span> : null}
+      </div>
+    ) : null}
+    {detailUrl || p.liveUrl ? (
+      <div class="project-card-actions">
+        {detailUrl ? <a class="link-btn" href={detailUrl}>Details</a> : null}
+        {p.liveUrl ? (
+          <a class="link-btn" href={p.liveUrl} target="_blank" rel="noopener noreferrer">
+            <i class="fa fa-external-link" aria-hidden="true"></i> Live <span class="sr-only">(opens in a new tab)</span>
+          </a>
+        ) : null}
+      </div>
+    ) : null}
+  </div>
+</article>

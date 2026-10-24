@@ -1,20 +1,21 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { featuredProjects } from '../data/projects';
+import { cv } from '../data/cv';
+import { moreProjects, projectSections } from '../data/moreProjects';
+import MiniProjectCard from '../components/MiniProjectCard.astro';
 
 const year = new Date().getFullYear();
 const baseUrl = import.meta.env.BASE_URL;
 
 const profile = {
   name: 'Sumon Ray',
-  title: 'Software Engineer · 8+ Years',
-  headline: 'I build software people at work can actually run.',
-  focus: 'Backend, full-stack, and business systems — mostly PHP/Laravel, MySQL, and APIs',
+  title: 'IT & Digitalization · 10+ Years',
   location: 'Dhaka, Bangladesh',
   photoSrc: 'img/ss-linkedin.png',
   email: 'sumancsediu@gmail.com',
   phone: '+880 1952 499680',
-  resumeUrl: 'files/Sumon_Ray_Software_Engineer_Resume_2026.pdf',
+  resumeUrl: 'files/Sumon_Ray_CV_Lead_IT_Digitalisation_2026.pdf',
   links: {
     github: 'https://github.com/sshanto13',
     linkedin: 'https://linkedin.com/in/sshanto13/',
@@ -22,40 +23,21 @@ const profile = {
   },
 };
 
+// Text below comes from the CV (src/data/cv.ts, generated from the final CV document).
+const summaryParts = cv.summary.split(/(?<=\.)\s+/);
+const heroLead = summaryParts[0];
+const heroFollow = summaryParts.slice(1).join(' ');
+const leadership = cv.techGroups[cv.techGroups.length - 1].lines;
+
 const usefulFor = [
-  'Backend & full-stack development where APIs, databases, and business logic matter.',
-  'Business applications—e-commerce, ERP/POS, inventory, booking, and automation.',
-  'Data, reporting, dashboards, and operational automation tied to real business needs.',
-  'Cross-stack problem solving across backend, frontend, databases, APIs, and infrastructure.',
-  'Production-focused engineering—shipping features, troubleshooting, optimization, and keeping systems reliable.',
+  'Business applications and ERP — custom ERP, POS, e-commerce, and supply chain systems.',
+  'Business process automation, operational reporting, and dashboards tied to real business needs.',
+  'Server and infrastructure support — hosting, DNS, email, backups, access control, and cost management.',
+  'Production security basics — firewall configuration, Cloudflare-based Layer 7 DDoS mitigation, and automated backups.',
+  'Coordinating developers, QA, business stakeholders, and technology vendors to get delivery done.',
 ];
 
-const whatIDo = [
-  {
-    title: 'Backend & APIs',
-    text: 'Most of my day-to-day work is PHP/Laravel, MySQL, and REST APIs — shipping features and keeping production healthy.',
-  },
-  {
-    title: 'Full-stack when needed',
-    text: 'I can work on the UI side too (Angular, Vue, React, plain JS) when a feature needs it.',
-  },
-  {
-    title: 'Business software',
-    text: 'A lot of my experience is e-commerce, ERP/POS, booking, inventory, and business automation — not just landing pages.',
-  },
-  {
-    title: 'Automation & reporting',
-    text: 'I like cutting down manual work: dashboards, reports, business automation, and digital transformation that save time.',
-  },
-  {
-    title: 'Data & SQL',
-    text: 'Comfortable with schema design, query tuning, and pulling useful reports out of messy operational data.',
-  },
-  {
-    title: 'Production support',
-    text: 'Debugging live issues, checking logs, fixing broken integrations, and helping with deploys on VPS/cloud setups.',
-  },
-];
+const whatIDo = cv.highlights;
 
 const beyondCoding = [
   {
@@ -84,327 +66,48 @@ const beyondCoding = [
   },
 ];
 
-const skillTabs: { id: string; label: string; icon: string; blurb: string; skills: string[] }[] = [
-  {
-    id: 'backend',
-    label: 'Programming & Backend',
-    icon: 'fa-server',
-    blurb: 'Programming & backend delivery.',
-    skills: [
-      'PHP',
-      'Laravel',
-      'Node.js',
-      'Python',
-      'Go',
-      'JavaScript',
-      'TypeScript',
-      'REST APIs',
-      'API Integration',
-      'Web Services',
-    ],
-  },
-  {
-    id: 'business',
-    label: 'Business & Systems',
-    icon: 'fa-briefcase',
-    blurb: 'Business applications and operational systems.',
-    skills: [
-      'E-commerce',
-      'ERP',
-      'POS',
-      'Inventory',
-      'Sales & Billing',
-      'Booking Systems',
-      'Property Management',
-      'Process Automation',
-    ],
-  },
-  {
-    id: 'database',
-    label: 'Database & Data',
-    icon: 'fa-database',
-    blurb: 'Database design, querying, and data modeling.',
-    skills: [
-      'MySQL',
-      'PostgreSQL',
-      'MongoDB',
-      'SQL',
-      'Database Design',
-      'Query Optimization',
-      'Data Modeling',
-      'Redis',
-    ],
-  },
-  {
-    id: 'frontend',
-    label: 'Frontend',
-    icon: 'fa-desktop',
-    blurb: 'Interfaces and client-side delivery.',
-    skills: [
-      'Angular',
-      'Vue.js',
-      'React',
-      'JavaScript',
-      'TypeScript',
-      'jQuery',
-      'AJAX',
-      'HTML5',
-      'CSS3',
-      'Bootstrap',
-      'Tailwind CSS',
-      'Inertia.js',
-    ],
-  },
-  {
-    id: 'cloud',
-    label: 'Cloud, DevOps & Infra',
-    icon: 'fa-cloud',
-    blurb: 'Cloud, DevOps, and infrastructure.',
-    skills: [
-      'AWS EC2 RDS SES',
-      'Cloudflare',
-      'DigitalOcean',
-      'Vultr',
-      'Cloud VPS',
-      'Docker',
-      'CI/CD',
-      'DNS',
-      'SSL',
-      'Linux',
-    ],
-  },
-  {
-    id: 'bi',
-    label: 'BI, Reporting & Analytics',
-    icon: 'fa-bar-chart',
-    blurb: 'Reporting, dashboards, and analytics.',
-    skills: [
-      'Power BI',
-      'Dashboards',
-      'Custom Reports',
-      'Google Analytics 4',
-      'Data Tracking',
-      'Conversion Tracking',
-    ],
-  },
-  {
-    id: 'ai',
-    label: 'AI-Assisted Development',
-    icon: 'fa-magic',
-    blurb: 'AI-assisted development workflow.',
-    skills: [
-      'Rapid MVP Development',
-      'Cursor',
-      'Claude',
-      'AI-Assisted Coding',
-      'Debugging',
-      'Review',
-    ],
-  },
-  {
-    id: 'practices',
-    label: 'Engineering Practices',
-    icon: 'fa-cogs',
-    blurb: 'Development and engineering practices.',
-    skills: [
-      'Git',
-      'System Design',
-      'Clean Architecture',
-      'Code Review',
-      'API Testing',
-      'Debugging',
-      'Optimisation',
-      'Security Practices',
-    ],
-  },
-  {
-    id: 'cms',
-    label: 'CMS and SEO',
-    icon: 'fa-sitemap',
-    blurb: 'CMS and e-commerce platforms.',
-    skills: [
-      'WordPress',
-      'WooCommerce',
-      'Shopify',
-      'Wix',
-      'WordPress REST API',
-      'SEO Integration',
-    ],
-  },
-  {
-    id: 'delivery',
-    label: 'Delivery & Collaboration',
-    icon: 'fa-users',
-    blurb: 'Delivery, coordination, and team ownership.',
-    skills: [
-      'Requirements',
-      'Stakeholders',
-      'Teamwork',
-      'Planning',
-      'Delivery',
-      'Mentoring',
-      'Production Support',
-      'Coordination',
-    ],
-  },
-  {
-    id: 'tools',
-    label: 'Tools and Workflow',
-    icon: 'fa-wrench',
-    blurb: 'Everyday tools and collaboration.',
-    skills: [
-      'VS Code',
-      'IntelliJ IDEA',
-      'Sublime Text',
-      'Jira',
-      'Slack',
-      'Trello',
-      'Agile / Scrum',
-      'Technical Documentation',
-    ],
-  },
-];
+const skillGroups = cv.techGroups.map((g) => ({
+  label: g.title.replace(/^\d+\.\s*/, ''),
+  lines: g.lines,
+}));
 
 const stats = [
-  { value: '8+', label: 'Years building software' },
-  { value: '5+', label: 'Years in e-commerce / ERP' },
-  { value: '6+', label: 'Industries covered' },
+  { value: '10+', label: 'Years of experience' },
+  { value: 'Local & Global', label: 'Teams worked with', text: true },
+  { value: '50+', label: 'Projects delivered' },
 ];
 
-type Experience = {
-  company: string;
-  companyUrl?: string;
-  logo?: string;
-  title: string;
-  location: string;
-  start: string;
-  end: string;
-  summary: string;
-  bullets: string[];
-  stack?: string[];
-};
+const roleMeta = (r: { period?: string; location?: string }) => [r.period, r.location].filter(Boolean).join(' · ');
 
-const experience: Experience[] = [
-  {
-    company: 'Destinique Travel LLC',
-    companyUrl: 'https://destinique.com/',
-    logo: 'img/screenshots/destinique.png',
-    title: 'Software Engineer',
-    location: 'Dhaka, Bangladesh',
-    start: 'Feb 2025',
-    end: 'Present',
-    summary: 'Working on business automation, digital solutions, and APIs for a luxury travel / property team.',
-    bullets: [
-      'Built and maintain solutions for visitor tracking, ads, promotions, property, and booking.',
-      'Write REST APIs and dashboards the ops team actually uses day to day.',
-      'Help with the Angular customer site and how it talks to the PHP backend.',
-      'Tune slow queries when things get heavy; dig into bugs when something breaks in production.',
-      'Sit with business folks to figure out what they need, then ship something usable.',
-    ],
-    stack: ['PHP', 'Laravel', 'MySQL', 'Angular', 'JavaScript', 'REST API', 'Cloudflare', 'VPS'],
-  },
-  {
-    company: 'PaiMart by PaiNest — JS Enterprise Ltd.',
-    companyUrl: 'https://paimart.painest.com/',
-    logo: 'img/screenshots/paimart.png',
-    title: 'Assistant Manager, Engineering',
-    location: 'Dhaka, Bangladesh',
-    start: 'Jan 2021',
-    end: 'Jan 2025',
-    summary:
-      '4+ years building business automation and digital solutions across e-commerce, distribution, wholesale/retail ops, ERP/POS, and day-to-day business workflows.',
-    bullets: [
-      'Built and maintained systems across e-commerce, B2B distribution, wholesale/retail and field sales, products, inventory, orders, and suppliers.',
-      'Covered customers, payments, invoicing, billing, employee management, back-office operations, ERP/POS, reporting, APIs, and business workflows.',
-      'Learned how a complete business platform works—not just the software, but the sales, distribution, and day-to-day operations behind it.',
-      'Exposed APIs for storefront and mobile; collaborated with teams on integrations and production issues.',
-      'Handled releases, performance fixes, and production support as volume grew.',
-    ],
-    stack: ['PHP', 'Laravel', 'MySQL', 'JavaScript', 'REST API', 'jQuery', 'Git', 'VPS'],
-  },
-  {
-    company: 'ADN Telecom PLC',
-    companyUrl: 'https://www.adnsl.com/',
-    logo: 'img/portfolio/adncloud.png',
-    title: 'Assistant Manager, Engineering',
-    location: 'Gulshan, Dhaka, Bangladesh',
-    start: 'Oct 2019',
-    end: 'Jan 2021',
-    summary: 'Enterprise web apps and a government ICT project while at ADN.',
-    bullets: [
-      'Built Laravel backends and APIs for client and enterprise applications.',
-      'Main project I remember: NGTE Welfare Trust — applications, tracking, documents, admin flows.',
-      'Did the usual mix of schema work, testing, deploy help, and fixing production issues.',
-    ],
-    stack: ['PHP', 'Laravel', 'MySQL', 'JavaScript', 'REST API', 'Bootstrap'],
-  },
-  {
-    company: 'NYBSYS Inc.',
-    companyUrl: 'https://nybsys.com/',
-    logo: 'img/portfolio/nybsys.png',
-    title: 'Software Engineer',
-    location: 'Mirpur, Dhaka, Bangladesh',
-    start: 'Dec 2017',
-    end: 'Sep 2019',
-    summary: 'Web UI and API work on projects with teams spread across locations.',
-    bullets: [
-      'Built frontends and plugged them into backend APIs.',
-      'Worked with remote teammates on web / mobile related deliverables.',
-      'Took designs and tickets and turned them into working screens.',
-    ],
-    stack: ['PHP', 'JavaScript', 'HTML', 'CSS', 'API Integration'],
-  },
-  {
-    company: 'ICT Division — Learning & Earning Development Project',
-    companyUrl: 'https://ictd.gov.bd/',
-    logo: 'img/logos/ictd.png',
-    title: 'Trainer',
-    location: 'Dhaka, Bangladesh',
-    start: 'Dec 2016',
-    end: 'Apr 2017',
-    summary: 'Taught basic web development under an ICT Division training program.',
-    bullets: [
-      'Ran classes for ~200 learners on HTML, CSS, PHP, WordPress, and MySQL.',
-      'Mostly hands-on lab sessions, not slide-only teaching.',
-    ],
-    stack: ['HTML', 'CSS', 'PHP', 'WordPress', 'MySQL'],
-  },
+const experienceGroups = [
+  { label: 'Professional experience', items: cv.experience },
+  { label: 'Global project engagements', items: cv.consultancy },
+  { label: 'Government initiative', items: cv.government },
 ];
 
-const education = [
-  {
-    degree: 'B.Sc. in Computer Science & Engineering',
-    org: 'Dhaka International University',
-    time: '2010 – 2015',
-  },
-];
+const { education, training } = cv;
 
-const training = [
-  {
-    degree: 'Web Application Development with PHP',
-    org: 'BITM, BASIS',
-    time: '2015',
-    kind: 'Professional training',
-  },
-  {
-    degree: 'Web Design & Development',
-    org: 'Daffodil Institute of IT (DIIT)',
-    time: '2012',
-    kind: 'Professional training',
-  },
-];
+const popupSections = projectSections
+  .map((sec) => ({
+    title: sec.title,
+    groups: sec.groups
+      .map((g) => ({ name: g.name, items: moreProjects.filter((p) => p.group === g.key) }))
+      .filter((g) => g.items.length),
+  }))
+  .filter((sec) => sec.groups.length);
+const otherProjects = moreProjects.filter((p) => !p.group);
 
 ---
 
 <BaseLayout
-  title={`${profile.name} — Software Engineer`}
-  description="Sumon Ray — software engineer in Dhaka. PHP/Laravel, MySQL, APIs, e-commerce and business systems. Open to new roles."
+  title={`${profile.name} — IT & Digitalization`}
+  description="Sumon Ray — IT & Digitalization professional in Dhaka with over a decade of experience in ERP, e-commerce, system integration, IT infrastructure, security, and automation. Open to new roles."
   canonicalPath="/"
   structuredData={{
     '@context': 'https://schema.org',
     '@type': 'Person',
     name: profile.name,
-    jobTitle: 'Software Engineer',
+    jobTitle: 'IT & Digitalization Professional',
     url: Astro.site ?? 'https://sshanto13.github.io',
     image: new URL(profile.photoSrc, Astro.site ?? 'https://sshanto13.github.io').toString(),
     email: `mailto:${profile.email}`,
@@ -425,8 +128,8 @@ const training = [
 
       <div class="fk-nav-links" id="navLinks">
         <a class="fk-nav-link" href="#about">About</a>
-        <a class="fk-nav-link" href="#projects">Projects</a>
         <a class="fk-nav-link" href="#experience">Experience</a>
+        <a class="fk-nav-link" href="#projects">Projects</a>
         <a class="fk-nav-link" href="#skills">Skills</a>
       </div>
 
@@ -475,16 +178,10 @@ const training = [
               <p class="hero-name">{profile.name}</p>
               <p class="hero-role">{profile.title}</p>
               <h1 class="hero-title">
-                I build software people at work can <em>actually run</em>.
+                Practical technology for <em>real business operations</em>.
               </h1>
-              <p class="hero-lead">
-                8+ years turning real-world requirements into web applications, APIs, business systems, and automation
-                solutions across different industries and business environments.
-              </p>
-              <p class="hero-lead hero-lead-follow">
-                I work across the stack when needed—from backend and APIs to frontend, databases, infrastructure,
-                reporting, and AI-assisted development.
-              </p>
+              <p class="hero-lead">{heroLead}</p>
+              <p class="hero-lead hero-lead-follow">{heroFollow}</p>
 
               <div class="hero-actions">
                 <a class="btn-primary-neo" href="#contact">Get in touch</a>
@@ -494,7 +191,7 @@ const training = [
 
               <div class="stat-row stat-row-impact" aria-label="quick stats">
                 {stats.map((s) => (
-                  <div class="stat stat-lg">
+                  <div class={s.text ? 'stat stat-lg stat-text' : 'stat stat-lg'}>
                     <strong>{s.value}</strong>
                     <span>{s.label}</span>
                   </div>
@@ -522,40 +219,14 @@ const training = [
           </div>
 
           <div class="about-card-body">
-            <p class="about-card-lead">
-              I’m a Software Engineer with 8+ years of experience building practical software solutions for real-world
-              business operations.
-            </p>
+            <p class="about-card-lead">{heroLead}</p>
 
             <div class="about-card-copy">
-              <p>
-                My experience spans software companies, enterprise systems, e-commerce, government ICT, and travel &amp;
-                property management. At NYBSYS Inc and ADN Telecom PLC, I worked on software products, enterprise
-                applications, APIs, and ICT systems, building a strong foundation in professional software development
-                and working with different technical and business requirements.
-              </p>
-              <p>
-                My 4+ years with PaiMart, previously known as Paikaree.com.bd and backed by JS Enterprise, were
-                particularly valuable in understanding how a complete business platform works—not just the software, but
-                the business behind it. I worked across e-commerce, sales, distribution, inventory, orders, payments,
-                ERP/POS, reporting, APIs, and business workflows, gaining a strong understanding of how technology
-                supports day-to-day business operations.
-              </p>
-              <p>
-                At Destinique Travel LLC, I work on business automation and digital solutions covering booking, property
-                management, ad generation, promotions, visitor tracking, monitoring, APIs, dashboards, and operational
-                workflows.
-              </p>
-              <p>
-                My strongest technical ground is PHP, Laravel, SQL, MySQL, PostgreSQL, JavaScript, and REST APIs, with
-                experience across Angular, Vue, React, Node.js, Python, cloud/VPS infrastructure, Docker, and AI-assisted
-                development.
-              </p>
-              <p>
-                I also have experience with data, BI dashboards, reporting, business automation, and digital
-                transformation, giving me a broader understanding of how technology can improve business processes,
-                operational efficiency, and decision-making.
-              </p>
+              <p>{summaryParts[1]}</p>
+              <p>{summaryParts[2]}</p>
+              {leadership.map((l) => (
+                <p>{l.text}</p>
+              ))}
               <p>
                 What I enjoy most is working where technology and business come together—understanding the problem,
                 finding a practical solution, building it, and seeing it work in the real world.
@@ -572,22 +243,24 @@ const training = [
           <p class="section-kicker">Skills</p>
           <h2 class="section-lead">What I bring to your team</h2>
           <p class="section-desc">
-            Building practical software solutions across <strong>full-stack development, business applications, APIs,
-            automation, data, and ICT systems</strong>, with <strong>8+ years of hands-on experience</strong> from
-            development through production delivery.
+            Technical experience across <strong>enterprise applications &amp; ERP, software engineering &amp; automation,
+            data &amp; BI, IT infrastructure &amp; cybersecurity, and delivery leadership</strong> — over a decade of
+            hands-on work from development through production support.
           </p>
         </header>
 
         <div class="skill-rows reveal">
-          {skillTabs.map((tab) => (
+          {skillGroups.map((g) => (
             <div class="skill-row">
-              <div class="skill-row-label">{tab.label}</div>
+              <div class="skill-row-label">{g.label}</div>
               <div class="skill-row-values">
-                <div class="chip-row chip-row-compact">
-                  {tab.skills.map((s) => (
-                    <span class="chip chip-compact">{s}</span>
+                <ul class="skill-lines">
+                  {g.lines.map((l) => (
+                    <li>
+                      <strong>{l.label}:</strong> {l.text}
+                    </li>
                   ))}
-                </div>
+                </ul>
               </div>
             </div>
           ))}
@@ -601,55 +274,66 @@ const training = [
           <div class="col text-center reveal">
             <p class="section-kicker">Experience</p>
             <h2 class="exp-section-title">Where I’ve shipped</h2>
-            <p class="exp-section-sub">E-commerce, travel ops, telecom/ICT, and international project work.</p>
+            <p class="exp-section-sub">Employment, global project engagements, and a government training initiative — Bangladesh, the US, and Europe.</p>
           </div>
         </div>
 
         <div class="timeline">
-          {experience.map((e) => (
-            <div class="timeline-item mb-5 reveal">
-              <span class="timeline-dot"></span>
-              <article class="card exp-card border-0 shadow-sm p-4 ml-3">
-                <div class="d-flex align-items-center mb-3 exp-card-head">
-                  {e.logo ? (
-                    <img src={e.logo} alt="" width="48" height="48" class="rounded exp-logo" loading="lazy" />
-                  ) : (
-                    <div class="exp-logo-fallback rounded" aria-hidden="true">
-                      {e.company.charAt(0)}
-                    </div>
-                  )}
-                  <div>
-                    <h3 class="exp-role mb-0">{e.title}</h3>
-                    <span class="exp-company">
-                      {e.companyUrl ? (
-                        <a href={e.companyUrl} class="text-decoration-none" target="_blank" rel="noopener noreferrer">
-                          {e.company}
-                        </a>
+          {experienceGroups.map((group) => (
+            <>
+              <h3 class="timeline-group-title reveal">{group.label}</h3>
+              {group.items.map((e) => (
+                <div class="timeline-item mb-5 reveal">
+                  <span class="timeline-dot"></span>
+                  <article class="card exp-card border-0 shadow-sm p-4 ml-3">
+                    <div class="d-flex align-items-center mb-3 exp-card-head">
+                      {e.logo ? (
+                        <img src={e.logo} alt="" width="48" height="48" class="rounded exp-logo" loading="lazy" />
                       ) : (
-                        e.company
+                        <div class="exp-logo-fallback rounded" aria-hidden="true">
+                          {e.company.charAt(0)}
+                        </div>
                       )}
-                    </span>
-                  </div>
+                      <div>
+                        <h3 class="exp-role mb-0">{e.title}</h3>
+                        <span class="exp-company">
+                          {e.companyUrl ? (
+                            <a href={e.companyUrl} class="text-decoration-none" target="_blank" rel="noopener noreferrer">
+                              {e.company}
+                            </a>
+                          ) : (
+                            e.company
+                          )}
+                        </span>
+                      </div>
+                    </div>
+                    <div class="text-muted small mb-3">
+                      {roleMeta(e)}
+                      {e.engagement ? <span class="badge exp-badge exp-engagement">{e.engagement}</span> : null}
+                    </div>
+                    {e.intro ? <p class="mb-3 exp-summary">{e.intro}</p> : null}
+                    <h4 class="exp-achievements-label">What I worked on</h4>
+                    <ul class="mb-3 exp-bullets">
+                      {e.bullets.map((b) => (
+                        <li>{b}</li>
+                      ))}
+                    </ul>
+                    {e.keyProjects ? (
+                      <p class="exp-key-projects">
+                        <strong>Key projects:</strong> {e.keyProjects}
+                      </p>
+                    ) : null}
+                    {e.stack?.length ? (
+                      <div class="d-flex flex-wrap exp-badges">
+                        {e.stack.map((s) => (
+                          <span class="badge exp-badge">{s}</span>
+                        ))}
+                      </div>
+                    ) : null}
+                  </article>
                 </div>
-                <div class="text-muted small mb-3">
-                  {e.start} – {e.end} · {e.location}
-                </div>
-                <p class="mb-3 exp-summary">{e.summary}</p>
-                <h4 class="exp-achievements-label">What I worked on</h4>
-                <ul class="mb-3 exp-bullets">
-                  {e.bullets.map((b) => (
-                    <li>{b}</li>
-                  ))}
-                </ul>
-                {e.stack?.length ? (
-                  <div class="d-flex flex-wrap exp-badges">
-                    {e.stack.map((s) => (
-                      <span class="badge exp-badge">{s}</span>
-                    ))}
-                  </div>
-                ) : null}
-              </article>
-            </div>
+              ))}
+            </>
           ))}
         </div>
       </div>
@@ -663,6 +347,9 @@ const training = [
           <p class="section-desc">
             A selection of projects that showcase practical software for business operations, automation, and delivery.
           </p>
+          <button type="button" class="btn-ghost project-more-btn project-more-top" data-open-projects aria-haspopup="dialog" aria-controls="moreProjects">
+            Project see more <span class="project-more-count">{moreProjects.length}</span>
+          </button>
         </header>
 
         <div class="project-showcase">
@@ -704,8 +391,76 @@ const training = [
             );
           })}
         </div>
+
+        <div class="project-more">
+          <button type="button" class="btn-ghost project-more-btn" data-open-projects aria-haspopup="dialog" aria-controls="moreProjects">
+            See more projects <span class="project-more-count">{moreProjects.length}</span>
+          </button>
+        </div>
       </div>
     </section>
+
+    <dialog class="projects-dialog" id="moreProjects" aria-labelledby="moreProjectsTitle">
+      <div class="projects-dialog-inner">
+        <div class="projects-dialog-head">
+          <div>
+            <p class="section-kicker">More work</p>
+            <h2 class="projects-dialog-title" id="moreProjectsTitle">More projects</h2>
+          </div>
+          <button type="button" class="projects-dialog-close" data-close-projects aria-label="Close projects">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="projects-dialog-body">
+          {popupSections.map((sec) => (
+            <section class="popup-section">
+              <h3 class="popup-section-title">{sec.title}</h3>
+              {sec.groups.map((g) => (
+                <div class="popup-group">
+                  {g.name ? <h4 class="popup-group-title">{g.name}</h4> : null}
+                  <div class="project-showcase">
+                    {g.items.map((p) => (
+                      <MiniProjectCard p={p} />
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </section>
+          ))}
+          {otherProjects.length ? (
+            <section class="popup-section">
+              <h3 class="popup-section-title">Other projects</h3>
+              <div class="project-showcase">
+                {otherProjects.map((p) => (
+                  <MiniProjectCard p={p} />
+                ))}
+              </div>
+            </section>
+          ) : null}
+        </div>
+      </div>
+    </dialog>
+
+    <dialog class="lightbox" id="lightbox" aria-label="Project screenshot viewer">
+      <button type="button" class="lightbox-close" data-lb-close aria-label="Close viewer">&times;</button>
+      <button type="button" class="lightbox-nav lightbox-prev" data-lb-prev aria-label="Previous project">&#8249;</button>
+      <figure class="lightbox-figure">
+        <img class="lightbox-img" id="lightboxImg" alt="" />
+        <figcaption class="lightbox-caption">
+          <div>
+            <strong id="lightboxTitle"></strong>
+            <span id="lightboxLabel"></span>
+          </div>
+          <div class="lightbox-meta">
+            <a id="lightboxLive" class="link-btn" href="#" target="_blank" rel="noopener noreferrer" hidden>
+              <i class="fa fa-external-link" aria-hidden="true"></i> Live
+            </a>
+            <span id="lightboxCount" class="lightbox-count"></span>
+          </div>
+        </figcaption>
+      </figure>
+      <button type="button" class="lightbox-nav lightbox-next" data-lb-next aria-label="Next project">&#8250;</button>
+    </dialog>
 
     <section class="section" id="what-i-do">
       <div class="container">
@@ -716,7 +471,7 @@ const training = [
         </header>
         <div class="row">
           {whatIDo.map((item) => (
-            <div class="col-md-6 col-lg-4 mb-4 reveal">
+            <div class="col-md-6 col-lg-3 mb-4 reveal">
               <div class="service-card h-100">
                 <h3 class="service-title">{item.title}</h3>
                 <p class="service-text">{item.text}</p>
@@ -786,7 +541,7 @@ const training = [
         <header class="section-head reveal">
           <p class="section-kicker">Background</p>
           <h2 class="section-lead">Education</h2>
-          <p class="section-desc">Degree plus professional training that shaped how I build software.</p>
+          <p class="section-desc">Degree plus professional training.</p>
         </header>
 
         <div class="row">
@@ -806,7 +561,7 @@ const training = [
             <div class="col-md-4 mb-4 reveal">
               <div class="hero-card h-100 edu-card">
                 <div class="edu-card-top">
-                  <div class="small-muted">{e.kind}</div>
+                  <div class="small-muted">Professional training</div>
                   <div class="chip">{e.time}</div>
                 </div>
                 <h3 class="item-title">{e.degree}</h3>
@@ -826,8 +581,8 @@ const training = [
           I’ll help ship a fix.
         </h2>
         <p class="section-subtitle" style="margin-bottom:20px;">
-          A slow report, an ops process stuck in spreadsheets, an API that keeps breaking, a Laravel app that needs
-          someone who’s lived in production. Tell me what you’re trying to fix.
+          A slow report, an ops process stuck in spreadsheets, an ERP or integration that keeps breaking, a server
+          setup that needs someone who’s lived in production. Tell me what you’re trying to fix.
         </p>
         <div class="hero-actions">
           <a class="btn-primary-neo" href={`mailto:${profile.email}`}>Email me</a>
@@ -889,9 +644,117 @@ const training = [
     <div class="container d-flex flex-column flex-md-row justify-content-between align-items-start gap-2">
       <div>
         <div style="font-weight:800;">{profile.name}</div>
-        <div class="small-muted">Software engineer · {profile.location}</div>
+        <div class="small-muted">IT &amp; Digitalization · {profile.location}</div>
       </div>
       <div class="small-muted">© {year}</div>
     </div>
   </footer>
 </BaseLayout>
+
+<script>
+  const dialog = document.getElementById('moreProjects') as HTMLDialogElement | null;
+  const openBtns = document.querySelectorAll('[data-open-projects]');
+  let lastBtn: HTMLElement | null = null;
+  if (dialog && openBtns.length) {
+    openBtns.forEach((btn) =>
+      btn.addEventListener('click', () => {
+        lastBtn = btn as HTMLElement;
+        dialog.showModal();
+        document.documentElement.classList.add('modal-open');
+      }),
+    );
+    dialog.querySelector('[data-close-projects]')?.addEventListener('click', () => dialog.close());
+    // Click on the backdrop (outside the inner panel) closes the dialog.
+    dialog.addEventListener('click', (e) => {
+      if (e.target === dialog) dialog.close();
+    });
+    dialog.addEventListener('close', () => {
+      document.documentElement.classList.remove('modal-open');
+      lastBtn?.focus();
+    });
+  }
+</script>
+
+<script>
+  const lb = document.getElementById('lightbox') as HTMLDialogElement | null;
+  const popup = document.getElementById('moreProjects');
+  if (lb && popup) {
+    const img = document.getElementById('lightboxImg') as HTMLImageElement;
+    const titleEl = document.getElementById('lightboxTitle')!;
+    const labelEl = document.getElementById('lightboxLabel')!;
+    const countEl = document.getElementById('lightboxCount')!;
+    const liveEl = document.getElementById('lightboxLive') as HTMLAnchorElement;
+    const items = Array.from(popup.querySelectorAll<HTMLElement>('[data-lightbox]'));
+    let current = 0;
+
+    const read = (el: HTMLElement) => {
+      const card = el.closest('.project-card');
+      return {
+        src: (el.querySelector('img') as HTMLImageElement).currentSrc || (el.querySelector('img') as HTMLImageElement).src,
+        title: card?.querySelector('.project-card-title')?.textContent?.trim() ?? '',
+        label: card?.querySelector('.project-card-company')?.textContent?.trim() ?? '',
+        live: el.dataset.live || '',
+      };
+    };
+
+    const show = (i: number) => {
+      current = (i + items.length) % items.length;
+      const d = read(items[current]);
+      img.src = d.src;
+      img.alt = `${d.title} screenshot`;
+      titleEl.textContent = d.title;
+      labelEl.textContent = d.label;
+      countEl.textContent = `${current + 1} / ${items.length}`;
+      if (d.live) {
+        liveEl.href = d.live;
+        liveEl.hidden = false;
+      } else {
+        liveEl.hidden = true;
+      }
+      // Warm the cache for the neighbours so arrow navigation feels instant.
+      [current - 1, current + 1].forEach((n) => {
+        const nb = items[(n + items.length) % items.length];
+        const pre = new Image();
+        pre.src = read(nb).src;
+      });
+    };
+
+    const open = (i: number) => {
+      show(i);
+      if (!lb.open) lb.showModal();
+    };
+
+    items.forEach((el, i) => {
+      el.addEventListener('click', () => open(i));
+      el.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          open(i);
+        }
+      });
+    });
+
+    lb.querySelector('[data-lb-prev]')?.addEventListener('click', () => show(current - 1));
+    lb.querySelector('[data-lb-next]')?.addEventListener('click', () => show(current + 1));
+    lb.querySelector('[data-lb-close]')?.addEventListener('click', () => lb.close());
+    lb.addEventListener('click', (e) => {
+      if (e.target === lb) lb.close();
+    });
+    lb.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') show(current - 1);
+      if (e.key === 'ArrowRight') show(current + 1);
+    });
+
+    // Swipe left / right on touch screens.
+    let startX = 0;
+    lb.addEventListener('touchstart', (e) => (startX = e.changedTouches[0].clientX), { passive: true });
+    lb.addEventListener(
+      'touchend',
+      (e) => {
+        const dx = e.changedTouches[0].clientX - startX;
+        if (Math.abs(dx) > 50) show(current + (dx < 0 ? 1 : -1));
+      },
+      { passive: true },
+    );
+  }
+</script>
